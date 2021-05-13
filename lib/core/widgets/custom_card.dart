@@ -1,5 +1,5 @@
 import 'package:elegant_calorie_tracker/core/themes.dart';
-import 'package:elegant_calorie_tracker/utils/screen.dart';
+import 'package:elegant_calorie_tracker/core/screen.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {

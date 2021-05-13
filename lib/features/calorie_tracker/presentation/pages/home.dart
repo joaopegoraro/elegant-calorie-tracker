@@ -1,10 +1,8 @@
-import 'file:///home/joaophp/Desenvolvimento/Projetos/Personal/elegant_calorie_tracker/test/testfodder.dart';
 import 'package:elegant_calorie_tracker/features/calorie_tracker/presentation/pages/food_search.dart';
 import 'package:elegant_calorie_tracker/core/themes.dart';
-import 'package:elegant_calorie_tracker/utils/screen.dart';
+import 'package:elegant_calorie_tracker/core/screen.dart';
 import 'package:elegant_calorie_tracker/features/calorie_tracker/presentation/widgets/calorie_counter.dart';
-import 'package:elegant_calorie_tracker/core/custom_text_widget.dart';
-import 'package:elegant_calorie_tracker/core/food_column_widget.dart';
+import 'package:elegant_calorie_tracker/core/widgets/custom_text_widget.dart';
 import 'package:elegant_calorie_tracker/features/calorie_tracker/presentation/widgets/nutrients_row_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -82,8 +80,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildBody(BuildContext context) {
-    final TestList testList = TestList(context);
-    testList.testFunction();
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -134,9 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             height: Screen.heightUnit(context) * 2,
           ),
-          FoodColumn(
-            children: testList.foodWidgetList,
-          ),
+          //FoodColumn(),
           SizedBox(
             height: Screen.heightUnit(context) * 2,
           ),
