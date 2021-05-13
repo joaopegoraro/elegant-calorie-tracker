@@ -1,5 +1,5 @@
 import 'package:elegant_calorie_tracker/models/food.dart';
-import 'package:elegant_calorie_tracker/common_widgets/food_widget.dart';
+import 'package:elegant_calorie_tracker/core/food_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //83

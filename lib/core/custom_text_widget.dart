@@ -1,4 +1,4 @@
-import 'package:elegant_calorie_tracker/theme_data/themes.dart';
+import 'package:elegant_calorie_tracker/core/themes.dart';
 import 'package:elegant_calorie_tracker/utils/screen.dart';
 import 'package:flutter/material.dart';
 

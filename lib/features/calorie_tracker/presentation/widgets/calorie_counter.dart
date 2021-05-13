@@ -1,8 +1,8 @@
-import 'package:elegant_calorie_tracker/theme_data/themes.dart';
+import 'package:elegant_calorie_tracker/core/themes.dart';
 import 'package:elegant_calorie_tracker/utils/screen.dart';
 import 'package:flutter/material.dart';
 
-import '../../../common_widgets/custom_text_widget.dart';
+import '../../../../core/custom_text_widget.dart';
 
 /// Returns a Column containing the sum of the FoodColumn calories
 class CalorieCounter extends StatelessWidget {

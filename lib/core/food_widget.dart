@@ -1,8 +1,8 @@
 import 'package:elegant_calorie_tracker/models/food.dart';
-import 'package:elegant_calorie_tracker/theme_data/themes.dart';
+import 'package:elegant_calorie_tracker/core/themes.dart';
 import 'package:elegant_calorie_tracker/utils/screen.dart';
-import 'package:elegant_calorie_tracker/common_widgets/custom_card.dart';
-import 'package:elegant_calorie_tracker/common_widgets/custom_text_widget.dart';
+import 'package:elegant_calorie_tracker/core/custom_card.dart';
+import 'package:elegant_calorie_tracker/core/custom_text_widget.dart';
 import 'package:flutter/material.dart';
 
 /// Takes a Food object as a parameter and returns a card with its name and calories

@@ -1,11 +1,11 @@
 import 'file:///home/joaophp/Desenvolvimento/Projetos/Personal/elegant_calorie_tracker/test/testfodder.dart';
-import 'package:elegant_calorie_tracker/screens/food_search/food_search.dart';
-import 'package:elegant_calorie_tracker/theme_data/themes.dart';
+import 'package:elegant_calorie_tracker/features/food_search/presentation/pages/food_search.dart';
+import 'package:elegant_calorie_tracker/core/themes.dart';
 import 'package:elegant_calorie_tracker/utils/screen.dart';
-import 'package:elegant_calorie_tracker/screens/home/local_widgets/calorie_counter.dart';
-import 'package:elegant_calorie_tracker/common_widgets/custom_text_widget.dart';
-import 'package:elegant_calorie_tracker/common_widgets/food_column_widget.dart';
-import 'package:elegant_calorie_tracker/screens/home/local_widgets/nutrients_row_widget.dart';
+import 'package:elegant_calorie_tracker/features/calorie_tracker/presentation/widgets/calorie_counter.dart';
+import 'package:elegant_calorie_tracker/core/custom_text_widget.dart';
+import 'package:elegant_calorie_tracker/core/food_column_widget.dart';
+import 'package:elegant_calorie_tracker/features/calorie_tracker/presentation/widgets/nutrients_row_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
