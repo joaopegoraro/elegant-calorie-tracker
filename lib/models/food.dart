@@ -1,11 +1,11 @@
 /// Food model which stores food properties
 class Food {
-  String _name;
-  double _calories;
-  double _weight;
-  double _carbs;
-  double _protein;
-  double _fat;
+  late String _name;
+  late double _calories;
+  late double _weight;
+  late double _carbs;
+  late double _protein;
+  late double _fat;
 
   // Getters
   String get name => _name;

@@ -14,18 +14,19 @@ class TestList {
   Food pasta = Food();
 
   void testFunction() {
-    Food pasta = new Food();
+    final Food pasta = Food();
     pasta.name = "Pasta";
     pasta.calories = 361;
-    Food beef = new Food();
+    final Food beef = Food();
     beef.name = "Beef";
     beef.calories = 215;
-    Food omellet = new Food();
+    final Food omellet = Food();
     omellet.name = "Omellet";
     omellet.calories = 142;
     createFood(pasta);
     createFood(beef);
     createFood(omellet);
+    createFood(pasta);
   }
 
   void createFood(Food foodL) {
@@ -34,15 +35,15 @@ class TestList {
   }
 
   void _addFoodToFoodList(Food food) {
-    this.foodList.add(food);
+    foodList.add(food);
   }
 
   void _addFoodToWidgetList(Food food) {
-    FoodWidget foodWidget = FoodWidget(context, food: food);
-    this.foodWidgetList.add(foodWidget);
+    final FoodWidget foodWidget = FoodWidget(context, food: food);
+    foodWidgetList.add(foodWidget);
     _addWidgetToDropList(foodWidget);
   }
 
   void _addWidgetToDropList(FoodWidget foodWidget) =>
-      this.foodDropDownList.add(DropdownMenuItem(child: foodWidget));
+      foodDropDownList.add(DropdownMenuItem(child: foodWidget));
 }

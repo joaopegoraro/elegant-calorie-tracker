@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FoodColumn extends StatelessWidget {
-  const FoodColumn({Key key, this.children}) : super(key: key);
+  const FoodColumn({Key? key, required this.children}) : super(key: key);
   final List<Widget> children;
 
   @override

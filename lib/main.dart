@@ -1,6 +1,6 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:elegant_calorie_tracker/screens/home/home.dart';
-import 'package:elegant_calorie_tracker/theme_data/Themes.dart';
+import 'package:elegant_calorie_tracker/theme_data/themes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +12,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    String appTitle = "Elegant Calorie Tracker";
+    const String appTitle = "Elegant Calorie Tracker";
     return MaterialApp(
       locale: DevicePreview.locale(context), // Add the locale here
       builder: DevicePreview.appBuilder, // Add the builder here
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Aladin',
         primarySwatch: Themes.swatch,
       ),
-      home: HomeScreen(
+      home: const HomeScreen(
         appTitle: appTitle,
       ),
     );

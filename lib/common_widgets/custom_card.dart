@@ -1,45 +1,46 @@
-import 'package:elegant_calorie_tracker/theme_data/Themes.dart';
+import 'package:elegant_calorie_tracker/theme_data/themes.dart';
 import 'package:elegant_calorie_tracker/utils/screen.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({
-    Key key,
+    Key? key,
     this.borderRadius,
-    this.elevation: 4.0,
+    this.elevation = 4.0,
     this.height,
     this.width,
-    this.alignment: Alignment.center,
+    this.alignment = Alignment.center,
     this.paddingSides,
     this.paddingTopBottom,
-    @required this.child,
+    required this.child,
   }) : super(key: key);
-  final double borderRadius;
+  final double? borderRadius;
   final double elevation;
-  final double height;
-  final double width;
+  final double? height;
+  final double? width;
   final AlignmentGeometry alignment;
-  final double paddingSides;
-  final double paddingTopBottom;
+  final double? paddingSides;
+  final double? paddingTopBottom;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    double defaultSidePadding = Screen.isLandscape(context)
+    final double defaultSidePadding = Screen.isLandscape(context)
         ? Screen.widthUnit(context) * 2
         : Screen.widthUnit(context) * 4;
-    double defaultTopBottomPadding = Screen.isLandscape(context)
+    final double defaultTopBottomPadding = Screen.isLandscape(context)
         ? Screen.heightUnit(context) * .5
         : Screen.heightUnit(context) * 1;
-    double defaultHeight = Screen.isLandscape(context)
+    final double defaultHeight = Screen.isLandscape(context)
         ? Screen.heightUnit(context) * 8.5
         : Screen.heightUnit(context) * 11;
     return Card(
       shadowColor: Themes.dark,
       color: Themes.cardBackground(context),
       shape: RoundedRectangleBorder(
-          borderRadius: borderRadius ??
-              BorderRadius.circular(Screen.heightUnit(context) * 1.5)),
+          borderRadius: (borderRadius != null)
+              ? BorderRadius.circular(borderRadius!)
+              : BorderRadius.circular(Screen.heightUnit(context) * 1.5)),
       elevation: elevation,
       child: Container(
         height: height ?? defaultHeight,

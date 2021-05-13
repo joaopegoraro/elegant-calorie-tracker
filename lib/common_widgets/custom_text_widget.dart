@@ -1,4 +1,4 @@
-import 'package:elegant_calorie_tracker/theme_data/Themes.dart';
+import 'package:elegant_calorie_tracker/theme_data/themes.dart';
 import 'package:elegant_calorie_tracker/utils/screen.dart';
 import 'package:flutter/material.dart';
 
@@ -6,18 +6,18 @@ import 'package:flutter/material.dart';
 class CustomTextWidget extends StatelessWidget {
   const CustomTextWidget(
     this.text, {
-    this.color: Themes.light,
-    this.fontWeight: FontWeight.bold,
+    this.color = Themes.light,
+    this.fontWeight = FontWeight.bold,
     this.fontSize,
-    this.fontFamily: 'Aladin',
-    this.shadow: true,
-    this.shadowColor: Themes.dark,
-    this.blurRadius: 0.5,
+    this.fontFamily = 'Aladin',
+    this.shadow = true,
+    this.shadowColor = Themes.dark,
+    this.blurRadius = 0.5,
   });
   final String text;
   final Color color;
   final FontWeight fontWeight;
-  final double fontSize;
+  final double? fontSize;
   final String fontFamily;
   final bool shadow;
   final Color shadowColor;

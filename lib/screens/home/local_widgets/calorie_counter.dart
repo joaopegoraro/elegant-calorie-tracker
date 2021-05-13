@@ -1,4 +1,4 @@
-import 'package:elegant_calorie_tracker/theme_data/Themes.dart';
+import 'package:elegant_calorie_tracker/theme_data/themes.dart';
 import 'package:elegant_calorie_tracker/utils/screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +15,6 @@ class CalorieCounter extends StatelessWidget {
           'Calories',
           color: Themes.header(context),
           fontSize: Screen.heightUnit(context) * 7,
-          fontFamily: 'Aladin',
           shadowColor: Colors.black,
         ),
         SizedBox(
@@ -25,7 +24,6 @@ class CalorieCounter extends StatelessWidget {
           '2400',
           color: Themes.cardBackground(context),
           fontSize: Screen.heightUnit(context) * 8,
-          shadowColor: Colors.black,
         ),
         CustomTextWidget(
           'kcal',
