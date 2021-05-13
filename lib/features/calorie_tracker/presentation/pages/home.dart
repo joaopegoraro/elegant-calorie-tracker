@@ -1,5 +1,5 @@
 import 'file:///home/joaophp/Desenvolvimento/Projetos/Personal/elegant_calorie_tracker/test/testfodder.dart';
-import 'package:elegant_calorie_tracker/features/food_search/presentation/pages/food_search.dart';
+import 'package:elegant_calorie_tracker/features/calorie_tracker/presentation/pages/food_search.dart';
 import 'package:elegant_calorie_tracker/core/themes.dart';
 import 'package:elegant_calorie_tracker/utils/screen.dart';
 import 'package:elegant_calorie_tracker/features/calorie_tracker/presentation/widgets/calorie_counter.dart';
