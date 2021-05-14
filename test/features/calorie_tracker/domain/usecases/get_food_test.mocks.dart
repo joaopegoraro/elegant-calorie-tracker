@@ -35,4 +35,10 @@ class MockFoodRepository extends _i1.Mock implements _i3.FoodRepository {
               returnValue: Future<_i2.Either<_i5.Failure, _i6.Food>>.value(
                   _FakeEither<_i5.Failure, _i6.Food>()))
           as _i4.Future<_i2.Either<_i5.Failure, _i6.Food>>);
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, List<_i6.Food>>> getSavedFoods() =>
+      (super.noSuchMethod(Invocation.method(#getSavedFoods, []),
+          returnValue: Future<_i2.Either<_i5.Failure, List<_i6.Food>>>.value(
+              _FakeEither<_i5.Failure, List<_i6.Food>>())) as _i4
+          .Future<_i2.Either<_i5.Failure, List<_i6.Food>>>);
 }

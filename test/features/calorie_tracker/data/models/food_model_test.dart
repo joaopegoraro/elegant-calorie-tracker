@@ -32,17 +32,59 @@ void main() {
 
   group('fromJson', () {
     test(
-      'should return a valid model when the JSON number is an integer',
+      'should return a List with a valid model',
       () async {
         // arrange
         final Map<String, dynamic> jsonMap =
             json.decode(fixture('food.json')) as Map<String, dynamic>;
         // act
-        final result = FoodModel.fromJson(jsonMap);
-        print(result);
+        final List<FoodModel>? result = FoodModel.fromJson(jsonMap);
         // assert
-        expect(result, testFoodModel);
+        expect(result, [testFoodModel]);
       },
     );
+    test('should return null', () async {
+      // arrange
+      final Map<String, dynamic> jsonMap =
+          json.decode(fixture('no_food.json')) as Map<String, dynamic>;
+      // act
+      final List<FoodModel>? result = FoodModel.fromJson(jsonMap);
+      // assert
+      expect(result, null);
+    });
+
+    test('should return a list of models', () async {
+      // arrange
+      final Map<String, dynamic> jsonMap =
+          json.decode(fixture('multiple_foods.json')) as Map<String, dynamic>;
+      // act
+      final result = FoodModel.fromJson(jsonMap);
+
+      // assert
+      expect(result, [testFoodModel, testFoodModel]);
+    });
+  });
+
+  group('toJson', () {
+    test('should return a JSON map containing the proper data', () async {
+      // act
+      final Map<String, dynamic> result = testFoodModel.toJson();
+      // assert
+      final Map<String, dynamic> expectedJsonMap = {
+        "sugar_g": 3.6,
+        "fiber_g": 2.3,
+        "serving_size_g": 100,
+        "sodium_mg": 587,
+        "name": "pizza",
+        "potassium_mg": 217,
+        "fat_saturated_g": 4.5,
+        "fat_total_g": 9.8,
+        "calories": 262.9,
+        "cholesterol_mg": 16,
+        "protein_g": 11.4,
+        "carbohydrates_total_g": 32.9
+      };
+      expect(result, expectedJsonMap);
+    });
   });
 }

@@ -30,24 +30,49 @@ class FoodModel extends Food {
           cholesterol: cholesterol,
         );
 
-  factory FoodModel.fromJson(Map<String, dynamic> json) {
+  static List<FoodModel>? fromJson(Map<String, dynamic> json) {
+    // Get the 'items' list that contains the food maps
     final List<dynamic> items = json["items"] as List<dynamic>;
-    final Map foodMap = items[0] as Map;
-    return FoodModel(
-      name: capitalize(foodMap["name"].toString()),
-      servingSize: foodMap["serving_size_g"].toDouble() as double,
-      calories: foodMap["calories"].toDouble() as double,
-      sugar: foodMap["sugar_g"].toDouble() as double,
-      fiber: foodMap['fiber_g'].toDouble() as double,
-      totalCarbs: foodMap['carbohydrates_total_g'].toDouble() as double,
-      saturatedFat: foodMap['fat_saturated_g'].toDouble() as double,
-      totalFat: foodMap['fat_total_g'].toDouble() as double,
-      protein: foodMap['protein_g'].toDouble() as double,
-      sodium: foodMap['sodium_mg'].toDouble() as double,
-      potassium: foodMap['potassium_mg'].toDouble() as double,
-      cholesterol: foodMap['cholesterol_mg'].toDouble() as double,
-    );
+    // If the list is empty return null
+    if (items.isEmpty) {
+      return null;
+    }
+    // Otherwise return a list with FoodModels made from the 'items' maps
+    final List<FoodModel> finalList = [];
+    for (final dynamic foodMap in items) {
+      foodMap as Map;
+      finalList.add(FoodModel(
+        name: capitalize(foodMap["name"].toString()),
+        servingSize: foodMap["serving_size_g"].toDouble() as double,
+        calories: foodMap["calories"].toDouble() as double,
+        sugar: foodMap["sugar_g"].toDouble() as double,
+        fiber: foodMap['fiber_g'].toDouble() as double,
+        totalCarbs: foodMap['carbohydrates_total_g'].toDouble() as double,
+        saturatedFat: foodMap['fat_saturated_g'].toDouble() as double,
+        totalFat: foodMap['fat_total_g'].toDouble() as double,
+        protein: foodMap['protein_g'].toDouble() as double,
+        sodium: foodMap['sodium_mg'].toDouble() as double,
+        potassium: foodMap['potassium_mg'].toDouble() as double,
+        cholesterol: foodMap['cholesterol_mg'].toDouble() as double,
+      ));
+    }
+    return finalList;
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "sugar_g": sugar,
+      "fiber_g": fiber,
+      "serving_size_g": servingSize,
+      "sodium_mg": sodium,
+      "name": name.toLowerCase(),
+      "potassium_mg": potassium,
+      "fat_saturated_g": saturatedFat,
+      "fat_total_g": totalFat,
+      "calories": calories,
+      "cholesterol_mg": cholesterol,
+      "protein_g": protein,
+      "carbohydrates_total_g": totalCarbs,
+    };
   }
 }
-/*
-*/
