@@ -15,6 +15,7 @@ import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
 
+// ignore: avoid_implementing_value_types
 class _FakeDuration extends _i1.Fake implements Duration {}
 
 class _FakeAddressCheckResult extends _i1.Fake

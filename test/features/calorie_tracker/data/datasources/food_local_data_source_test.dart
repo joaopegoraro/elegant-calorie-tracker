@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:elegant_calorie_tracker/core/error/exception.dart';
 import 'package:elegant_calorie_tracker/features/calorie_tracker/data/datasources/food_local_data_source.dart';
 import 'package:elegant_calorie_tracker/features/calorie_tracker/data/models/food_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

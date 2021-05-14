@@ -20,6 +20,7 @@ import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
 
+// ignore: avoid_implementing_value_types
 class _FakeFoodModel extends _i1.Fake implements _i2.FoodModel {}
 
 /// A class which mocks [NetworkInfo].
