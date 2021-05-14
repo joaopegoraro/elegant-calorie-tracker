@@ -5,17 +5,17 @@ import 'package:elegant_calorie_tracker/core/network/network_info.dart';
 import 'package:elegant_calorie_tracker/features/calorie_tracker/data/datasources/food_local_data_source.dart';
 import 'package:elegant_calorie_tracker/features/calorie_tracker/data/datasources/food_remote_data_source.dart';
 import 'package:elegant_calorie_tracker/features/calorie_tracker/data/models/food_model.dart';
-import 'package:elegant_calorie_tracker/features/calorie_tracker/data/repositories/food_repository_implementation.dart';
+import 'package:elegant_calorie_tracker/features/calorie_tracker/data/repositories/data_food_repository.dart';
 import 'package:elegant_calorie_tracker/features/calorie_tracker/domain/entities/food.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'food_repository_implementation_test.mocks.dart';
+import 'data_food_repository_test.mocks.dart';
 
 @GenerateMocks([NetworkInfo, FoodLocalDataSource, FoodRemoteDataSource])
 void main() {
-  late FoodRepositoryImplementation repository;
+  late DataFoodRepository repository;
   late MockFoodRemoteDataSource mockRemoteDataSource;
   late MockFoodLocalDataSource mockLocalDataSource;
   late MockNetworkInfo mockNetworkInfo;
@@ -24,7 +24,7 @@ void main() {
     mockRemoteDataSource = MockFoodRemoteDataSource();
     mockLocalDataSource = MockFoodLocalDataSource();
     mockNetworkInfo = MockNetworkInfo();
-    repository = FoodRepositoryImplementation(
+    repository = DataFoodRepository(
       remoteDataSource: mockRemoteDataSource,
       localDataSource: mockLocalDataSource,
       networkInfo: mockNetworkInfo,

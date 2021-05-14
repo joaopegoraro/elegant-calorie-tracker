@@ -15,10 +15,10 @@ abstract class FoodLocalDataSource {
 
 const String cachedFoodList = 'CACHED_FOOD_LIST';
 
-class FoodLocalDataSourceImplementation implements FoodLocalDataSource {
+class SharedPrefFoodLocalDataSource implements FoodLocalDataSource {
   final SharedPreferences sharedPreferences;
 
-  FoodLocalDataSourceImplementation({required this.sharedPreferences});
+  SharedPrefFoodLocalDataSource({required this.sharedPreferences});
 
   @override
   Future<void> saveFood(FoodModel foodToCache) {

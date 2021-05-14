@@ -7,12 +7,12 @@ import 'package:elegant_calorie_tracker/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:elegant_calorie_tracker/features/calorie_tracker/domain/repositories/food_repository.dart';
 
-class FoodRepositoryImplementation implements FoodRepository {
+class DataFoodRepository implements FoodRepository {
   final FoodRemoteDataSource remoteDataSource;
   final FoodLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
 
-  FoodRepositoryImplementation({
+  DataFoodRepository({
     required this.remoteDataSource,
     required this.localDataSource,
     required this.networkInfo,

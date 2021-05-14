@@ -13,12 +13,12 @@ import 'food_local_data_source_test.mocks.dart';
 
 @GenerateMocks([SharedPreferences])
 void main() {
-  late FoodLocalDataSourceImplementation dataSource;
+  late SharedPrefFoodLocalDataSource dataSource;
   late MockSharedPreferences mockSharedPreferences;
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
-    dataSource = FoodLocalDataSourceImplementation(
+    dataSource = SharedPrefFoodLocalDataSource(
       sharedPreferences: mockSharedPreferences,
     );
   });
