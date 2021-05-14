@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:elegant_calorie_tracker/core/error/exception.dart';
 import 'package:elegant_calorie_tracker/features/calorie_tracker/data/datasources/food_local_data_source.dart';
 import 'package:elegant_calorie_tracker/features/calorie_tracker/data/models/food_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -91,9 +92,9 @@ void main() {
       // arrange
       when(mockSharedPreferences.getString(any)).thenReturn(null);
       // act
-      final call = await dataSource.getSavedFoods();
+      final call = dataSource.getSavedFoods;
       // assert
-      expect(call, throwsA(isA()));
+      expect(call, throwsA(isA<CacheException>()));
     });
   });
 }
