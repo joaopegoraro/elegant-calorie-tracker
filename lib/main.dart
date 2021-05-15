@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(
+    // ignore: avoid_redundant_argument_values
     DevicePreview(enabled: true, builder: (context) => MyApp()),
   );
 }
