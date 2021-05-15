@@ -8,6 +8,6 @@ class FoodSearch extends StatefulWidget {
 class _FoodSearchState extends State<FoodSearch> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const TextField();
   }
 }
