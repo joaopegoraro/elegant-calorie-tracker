@@ -5,13 +5,13 @@ import 'package:elegant_calorie_tracker/features/calorie_tracker/domain/entities
 import 'package:elegant_calorie_tracker/features/calorie_tracker/domain/repositories/food_repository.dart';
 import 'package:equatable/equatable.dart';
 
-class GetFood extends UseCase<Food, Params> {
+class GetFood extends UseCase<List<Food>, Params> {
   final FoodRepository repository;
 
   GetFood(this.repository);
 
   @override
-  Future<Either<Failure, Food>> call(Params params) async {
+  Future<Either<Failure, List<Food>>> call(Params params) async {
     return repository.getFood(params.query);
   }
 }

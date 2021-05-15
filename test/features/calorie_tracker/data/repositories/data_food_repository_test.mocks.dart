@@ -2,15 +2,15 @@
 // in elegant_calorie_tracker/test/features/calorie_tracker/data/repositories/data_food_repository_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i4;
+import 'dart:async' as _i3;
 
-import 'package:elegant_calorie_tracker/core/network/network_info.dart' as _i3;
+import 'package:elegant_calorie_tracker/core/network/network_info.dart' as _i2;
 import 'package:elegant_calorie_tracker/features/calorie_tracker/data/datasources/food_local_data_source.dart'
-    as _i5;
+    as _i4;
 import 'package:elegant_calorie_tracker/features/calorie_tracker/data/datasources/food_remote_data_source.dart'
     as _i6;
 import 'package:elegant_calorie_tracker/features/calorie_tracker/data/models/food_model.dart'
-    as _i2;
+    as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: comment_references
@@ -20,42 +20,39 @@ import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
 
-// ignore: avoid_implementing_value_types
-class _FakeFoodModel extends _i1.Fake implements _i2.FoodModel {}
-
 /// A class which mocks [NetworkInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNetworkInfo extends _i1.Mock implements _i3.NetworkInfo {
+class MockNetworkInfo extends _i1.Mock implements _i2.NetworkInfo {
   MockNetworkInfo() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<bool> get isConnected =>
+  _i3.Future<bool> get isConnected =>
       (super.noSuchMethod(Invocation.getter(#isConnected),
-          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
 }
 
 /// A class which mocks [FoodLocalDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFoodLocalDataSource extends _i1.Mock
-    implements _i5.FoodLocalDataSource {
+    implements _i4.FoodLocalDataSource {
   MockFoodLocalDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<List<_i2.FoodModel>> getSavedFoods() =>
+  _i3.Future<List<_i5.FoodModel>> getSavedFoods() =>
       (super.noSuchMethod(Invocation.method(#getSavedFoods, []),
-              returnValue: Future<List<_i2.FoodModel>>.value(<_i2.FoodModel>[]))
-          as _i4.Future<List<_i2.FoodModel>>);
+              returnValue: Future<List<_i5.FoodModel>>.value(<_i5.FoodModel>[]))
+          as _i3.Future<List<_i5.FoodModel>>);
   @override
-  _i4.Future<void> saveFood(_i2.FoodModel? foodToCache) =>
-      (super.noSuchMethod(Invocation.method(#saveFood, [foodToCache]),
+  _i3.Future<void> saveFoods(List<_i5.FoodModel>? foodToCache) =>
+      (super.noSuchMethod(Invocation.method(#saveFoods, [foodToCache]),
           returnValue: Future<void>.value(null),
-          returnValueForMissingStub: Future.value()) as _i4.Future<void>);
+          returnValueForMissingStub: Future.value()) as _i3.Future<void>);
 }
 
 /// A class which mocks [FoodRemoteDataSource].
@@ -68,8 +65,8 @@ class MockFoodRemoteDataSource extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.FoodModel> getFood(String? query) =>
+  _i3.Future<List<_i5.FoodModel>> getFood(String? query) =>
       (super.noSuchMethod(Invocation.method(#getFood, [query]),
-              returnValue: Future<_i2.FoodModel>.value(_FakeFoodModel()))
-          as _i4.Future<_i2.FoodModel>);
+              returnValue: Future<List<_i5.FoodModel>>.value(<_i5.FoodModel>[]))
+          as _i3.Future<List<_i5.FoodModel>>);
 }

@@ -19,11 +19,11 @@ class DataFoodRepository implements FoodRepository {
   });
 
   @override
-  Future<Either<Failure, Food>> getFood(String query) async {
+  Future<Either<Failure, List<Food>>> getFood(String query) async {
     if (await networkInfo.isConnected) {
       try {
         final remoteFood = await remoteDataSource.getFood(query);
-        localDataSource.saveFood(remoteFood);
+        localDataSource.saveFoods(remoteFood);
         return Right(remoteFood);
       } on ServerException {
         return Left(ServerFailure());

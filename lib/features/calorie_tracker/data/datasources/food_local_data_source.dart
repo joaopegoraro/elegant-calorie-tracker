@@ -10,7 +10,7 @@ abstract class FoodLocalDataSource {
   /// Throws [NoLocalDataException] if no cached data is present.
   Future<List<FoodModel>> getSavedFoods();
 
-  Future<void> saveFood(FoodModel foodToCache);
+  Future<void> saveFoods(List<FoodModel> foodToCache);
 }
 
 const String cachedFoodList = 'CACHED_FOOD_LIST';
@@ -21,42 +21,58 @@ class SharedPrefFoodLocalDataSource implements FoodLocalDataSource {
   SharedPrefFoodLocalDataSource({required this.sharedPreferences});
 
   @override
-  Future<void> saveFood(FoodModel foodToCache) {
-    final String? initialString = sharedPreferences.getString(cachedFoodList);
-    // if the cached food list is null, create a new json file containing the
+  Future<void> saveFoods(List<FoodModel> foodsToCache) {
+    final String? initialJsonString =
+        sharedPreferences.getString(cachedFoodList);
+
+    // if the cached food list is null, create a new json string containing the
     // converted food model
-    if (initialString == null) {
-      final List<Map> itemsList = [];
-      final convertedModel = foodToCache.toJson();
-      itemsList.add(convertedModel);
-      final finalMap = {"items": itemsList};
+    if (initialJsonString == null) {
+      final List<Map> listOfJsonMaps = [];
+      final String finalJsonString =
+          mergeFoodModelListAndJsonMapIntoString(foodsToCache, listOfJsonMaps);
       return sharedPreferences.setString(
         cachedFoodList,
-        json.encode(finalMap),
+        finalJsonString,
       );
-      // Otherwise append the new converted food model to the already existing
-      // json file
+      // Otherwise append the food model to the already existing json string
     } else {
-      final convertedJson = json.decode(initialString) as Map<String, dynamic>;
-      final convertedModel = foodToCache.toJson();
-      final itemsList = convertedJson["items"] ?? [];
-      itemsList.add(convertedModel);
-      final finalMap = {"items": itemsList};
+      final convertedJsonStringToJsonMap =
+          json.decode(initialJsonString) as Map<String, dynamic>;
+      final listOfJsonMaps =
+          convertedJsonStringToJsonMap["items"] as List<dynamic>;
+      final String finalJsonString =
+          mergeFoodModelListAndJsonMapIntoString(foodsToCache, listOfJsonMaps);
       return sharedPreferences.setString(
         cachedFoodList,
-        json.encode(finalMap),
+        finalJsonString,
       );
     }
   }
 
   @override
   Future<List<FoodModel>> getSavedFoods() {
-    final String? cachedList = sharedPreferences.getString(cachedFoodList);
-    if (cachedList == null) {
+    final String? savedFoodList = sharedPreferences.getString(cachedFoodList);
+    if (savedFoodList == null) {
       throw CacheException();
     } else {
-      final convertedJson = json.decode(cachedList) as Map<String, dynamic>;
-      return Future.value(FoodModel.fromJson(convertedJson));
+      final convertedSavedFoodListToJsonMap =
+          json.decode(savedFoodList) as Map<String, dynamic>;
+      final convertedJsonMapToFoodModelList =
+          FoodModel.fromJson(convertedSavedFoodListToJsonMap);
+      return Future.value(convertedJsonMapToFoodModelList);
     }
+  }
+
+  String mergeFoodModelListAndJsonMapIntoString(
+    List<FoodModel> foodModelList,
+    List<dynamic> jsonMapList,
+  ) {
+    for (final FoodModel foodModel in foodModelList) {
+      final convertedFoodModelToJsonMap = foodModel.toJson();
+      jsonMapList.add(convertedFoodModelToJsonMap);
+    }
+    final finalJsonMap = {"items": jsonMapList};
+    return json.encode(finalJsonMap);
   }
 }

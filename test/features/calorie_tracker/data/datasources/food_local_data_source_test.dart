@@ -23,7 +23,6 @@ void main() {
     );
   });
   final jsonString = fixture('food.json');
-
   const tFoodModel = FoodModel(
     name: "Pizza",
     servingSize: 100,
@@ -38,6 +37,7 @@ void main() {
     potassium: 217,
     cholesterol: 16,
   );
+  const List<FoodModel> tFoodList = [tFoodModel];
   group('saveFood', () {
     test('should call SharedPreferences to cache the newly createad data', () {
       // arrange
@@ -45,7 +45,7 @@ void main() {
       when(mockSharedPreferences.setString(any, any))
           .thenAnswer((_) async => true);
       // act
-      dataSource.saveFood(tFoodModel);
+      dataSource.saveFoods(tFoodList);
       // assert
       final List<Map> itemsList = [];
       final convertedModel = tFoodModel.toJson();
@@ -60,16 +60,17 @@ void main() {
       when(mockSharedPreferences.setString(any, any))
           .thenAnswer((_) async => true);
       // act
-      dataSource.saveFood(tFoodModel);
+      dataSource.saveFoods(tFoodList);
       // assert
-      final convertedJson = json.decode(jsonString) as Map<String, dynamic>;
-      final convertedModel = tFoodModel.toJson();
-      final itemsList = convertedJson["items"] ?? [];
-      itemsList.add(convertedModel);
-      final finalMap = {"items": itemsList};
-      verify(mockSharedPreferences.setString(
-          cachedFoodList, json.encode(finalMap)));
-      expect(finalMap, json.decode(fixture('multiple_foods.json')));
+      final convertedJsonStringToJsonMap =
+          json.decode(jsonString) as Map<String, dynamic>;
+      final listOfJsonMaps =
+          convertedJsonStringToJsonMap["items"] as List<dynamic>;
+      final String finalJsonString = dataSource
+          .mergeFoodModelListAndJsonMapIntoString(tFoodList, listOfJsonMaps);
+      verify(mockSharedPreferences.setString(cachedFoodList, finalJsonString));
+      expect(json.decode(finalJsonString),
+          json.decode(fixture('multiple_foods.json')));
     });
   });
 

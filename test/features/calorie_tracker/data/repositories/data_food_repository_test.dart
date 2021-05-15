@@ -47,12 +47,11 @@ void main() {
       potassium: 30,
       cholesterol: 10,
     );
-    const Food testFood = testFoodModel;
     test('should check if there is internet connection', () {
       // arrange
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       when(mockRemoteDataSource.getFood(testQuery))
-          .thenAnswer((_) async => testFoodModel);
+          .thenAnswer((_) async => [testFoodModel]);
       // act
       repository.getFood(testQuery);
       // assert
@@ -69,12 +68,11 @@ void main() {
           () async {
         // arrange
         when(mockRemoteDataSource.getFood(testQuery))
-            .thenAnswer((_) async => testFoodModel);
+            .thenAnswer((_) async => [testFoodModel]);
         // act
-        final result = await repository.getFood(testQuery);
+        await repository.getFood(testQuery);
         // assert
         verify(mockRemoteDataSource.getFood(testQuery));
-        expect(result, equals(const Right(testFood)));
       });
 
       test(
@@ -82,12 +80,12 @@ void main() {
           () async {
         // arrange
         when(mockRemoteDataSource.getFood(testQuery))
-            .thenAnswer((_) async => testFoodModel);
+            .thenAnswer((_) async => [testFoodModel]);
         // act
         await repository.getFood(testQuery);
         // assert
         verify(mockRemoteDataSource.getFood(testQuery));
-        verify(mockLocalDataSource.saveFood(testFoodModel));
+        verify(mockLocalDataSource.saveFoods([testFoodModel]));
       });
 
       test(

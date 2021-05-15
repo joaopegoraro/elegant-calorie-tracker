@@ -41,11 +41,11 @@ void main() {
       // When getFood is called with any argument, always answer with
       // the Right "side" of Either containing a test Food object.
       when(mockFoodRepository.getFood(any))
-          .thenAnswer((_) async => const Right(testFood));
+          .thenAnswer((_) async => const Right([testFood]));
       // The "act" phase of the test. Call the method.
       final result = await usecase(const Params(query: testQuery));
       // UseCase should simply return whatever was returned from the Repository
-      expect(result, const Right(testFood));
+      expect(result, const Right([testFood]));
       // Verify that the method has been called on the Repository
       verify(mockFoodRepository.getFood(testQuery));
       // Only the above method should be called and nothing more.
