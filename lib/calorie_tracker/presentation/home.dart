@@ -1,4 +1,4 @@
-import 'package:elegant_calorie_tracker/calorie_tracker/presentation/pages/food_search.dart';
+import 'package:elegant_calorie_tracker/calorie_tracker/presentation/widgets/food_search.dart';
 import 'package:elegant_calorie_tracker/core/utils/themes.dart';
 import 'package:elegant_calorie_tracker/core/utils/screen.dart';
 import 'package:elegant_calorie_tracker/calorie_tracker/presentation/widgets/calorie_counter.dart';

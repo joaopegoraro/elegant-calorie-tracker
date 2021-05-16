@@ -1,5 +1,5 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:elegant_calorie_tracker/calorie_tracker/presentation/pages/home.dart';
+import 'package:elegant_calorie_tracker/calorie_tracker/presentation/home.dart';
 import 'package:elegant_calorie_tracker/core/utils/themes.dart';
 import 'package:flutter/material.dart';
 

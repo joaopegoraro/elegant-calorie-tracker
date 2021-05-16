@@ -1,4 +1,4 @@
-import 'package:elegant_calorie_tracker/calorie_tracker/data/models/food_model.dart';
+import 'package:elegant_calorie_tracker/calorie_tracker/data/food_model.dart';
 import 'package:elegant_calorie_tracker/core/utils/themes.dart';
 import 'package:elegant_calorie_tracker/core/utils/screen.dart';
 import 'package:elegant_calorie_tracker/core/widgets/custom_card.dart';

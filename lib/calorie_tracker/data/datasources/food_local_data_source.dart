@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:elegant_calorie_tracker/core/error/exception.dart';
-import 'package:elegant_calorie_tracker/calorie_tracker/data/models/food_model.dart';
+import 'package:elegant_calorie_tracker/calorie_tracker/data/food_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class FoodLocalDataSource {
