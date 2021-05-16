@@ -54,7 +54,7 @@ class SharedPrefFoodLocalDataSource implements FoodLocalDataSource {
   Future<List<FoodModel>> getSavedFoods() {
     final String? savedFoodList = sharedPreferences.getString(cachedFoodList);
     if (savedFoodList == null) {
-      throw FoodNotFoundException();
+      throw CacheException();
     } else {
       final convertedSavedFoodListToJsonMap =
           json.decode(savedFoodList) as Map<String, dynamic>;

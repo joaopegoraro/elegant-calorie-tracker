@@ -44,8 +44,8 @@ class DataFoodRepository implements FoodRepository {
     try {
       final List<FoodModel> localList = await localDataSource.getSavedFoods();
       return Right(localList);
-    } on FoodNotFoundException {
-      return Left(NotFoundFailure());
+    } on CacheException {
+      return Left(CacheFailure());
     }
   }
 }

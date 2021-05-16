@@ -94,7 +94,7 @@ void main() {
       // act
       final call = dataSource.getSavedFoods;
       // assert
-      expect(call, throwsA(isA<FoodNotFoundException>()));
+      expect(call, throwsA(isA<CacheException>()));
     });
   });
 }

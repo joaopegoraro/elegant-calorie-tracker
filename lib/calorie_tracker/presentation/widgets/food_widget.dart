@@ -10,7 +10,7 @@ class FoodWidget extends CustomCard {
   FoodWidget(
     BuildContext context, {
     this.foodWidth,
-    required this.food,
+    required this.foodModel,
   }) : super(
           height: Screen.heightUnit(context) * 8,
           width: foodWidth ?? Screen.widthUnit(context) * 83,
@@ -18,13 +18,13 @@ class FoodWidget extends CustomCard {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomTextWidget(
-                food.name,
+                foodModel.name,
                 color: Themes.cardHeader(context),
               ),
               Row(
                 children: [
                   CustomTextWidget(
-                    food.calories.toString(),
+                    foodModel.calories.toString(),
                     color: Themes.cardContent(context),
                   ),
                   CustomTextWidget(
@@ -37,5 +37,5 @@ class FoodWidget extends CustomCard {
           ),
         );
   final double? foodWidth;
-  final FoodModel food;
+  final FoodModel foodModel;
 }

@@ -6,3 +6,14 @@ abstract class CalorieTrackerEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class GetFood extends CalorieTrackerEvent {
+  final String query;
+
+  const GetFood(this.query);
+
+  @override
+  List<Object> get props => [query];
+}
+
+class GetSavedFood extends CalorieTrackerEvent {}
