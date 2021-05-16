@@ -1,5 +1,5 @@
-import 'package:elegant_calorie_tracker/core/themes.dart';
-import 'package:elegant_calorie_tracker/core/screen.dart';
+import 'package:elegant_calorie_tracker/core/utils/themes.dart';
+import 'package:elegant_calorie_tracker/core/utils/screen.dart';
 import 'package:flutter/material.dart';
 
 /// Shadowed text wraped in a FittedBox
