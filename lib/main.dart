@@ -5,8 +5,9 @@ import 'package:elegant_calorie_tracker/injection_container.dart'
     as dependency_injection;
 import 'package:flutter/material.dart';
 
-void main() {
-  dependency_injection.init();
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dependency_injection.init();
   runApp(
     // ignore: avoid_redundant_argument_values
     DevicePreview(enabled: true, builder: (context) => MyApp()),

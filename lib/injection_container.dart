@@ -10,7 +10,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 final serviceLocator = GetIt.instance;
 
-void init() {
+Future<void> init() async {
+  //! External
+  final sharedPreferences = await SharedPreferences.getInstance();
+  serviceLocator.registerLazySingleton<SharedPreferences>(
+    () => sharedPreferences,
+  );
+  serviceLocator.registerLazySingleton<http.Client>(
+    () => http.Client(),
+  );
+  serviceLocator.registerLazySingleton(
+    () => InternetConnectionChecker(),
+  );
+
   //! Calorie Tracker
   // Bloc
   serviceLocator.registerFactory(
@@ -44,16 +56,5 @@ void init() {
     () => InternetConnectionCheckerNetworkInfo(
       serviceLocator(),
     ),
-  );
-
-  //! External
-  serviceLocator.registerLazySingletonAsync(
-    () => SharedPreferences.getInstance(),
-  );
-  serviceLocator.registerLazySingleton(
-    () => http.Client(),
-  );
-  serviceLocator.registerLazySingleton(
-    () => InternetConnectionChecker(),
   );
 }
