@@ -1,6 +1,8 @@
+import 'package:elegant_calorie_tracker/calorie_tracker/calorie_tracker_manager.dart';
 import 'package:elegant_calorie_tracker/core/widgets/custom_button.dart';
 import 'package:elegant_calorie_tracker/core/widgets/custom_text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FoodSearch extends StatefulWidget {
   @override
@@ -35,7 +37,12 @@ class _FoodSearchState extends State<FoodSearch> {
     );
   }
 
-  void dispatchQuery() {}
+  void dispatchQuery() {
+    Provider.of<CalorieTrackerManager>(context, listen: false)
+        .getFood(inputString);
+  }
 
-  void clearColumn() {}
+  void clearColumn() =>
+      Provider.of<CalorieTrackerManager>(context, listen: false)
+          .emptyFoodList();
 }

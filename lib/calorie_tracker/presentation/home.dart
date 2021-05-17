@@ -153,7 +153,7 @@ class HomeScreen extends StatelessWidget {
                 height: Screen.heightUnit(context) * 2,
               ),
               // Saved food column
-              FoodColumn(foodWidgetList: manager.foodWidgetList(context)),
+              FoodColumn(foodWidgetList: manager.getFoodWidgetList(context)),
               SizedBox(
                 height: Screen.heightUnit(context) * 2,
               ),

@@ -24,7 +24,7 @@ class CalorieCounter extends StatelessWidget {
           height: Screen.heightUnit(context) * .65,
         ),
         CustomTextWidget(
-          calories.toString(),
+          calories.toStringAsFixed(1),
           color: Themes.cardBackground(context),
           fontSize: Screen.heightUnit(context) * 8,
         ),
