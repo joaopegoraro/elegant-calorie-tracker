@@ -9,8 +9,8 @@ abstract class FoodLocalDataSource {
   ///
   /// Throws [NoLocalDataException] if no cached data is present.
   Future<List<FoodModel>> getSavedFoods();
-
   Future<void> saveFoods(List<FoodModel> foodToCache);
+  Future<void> emptySavedFoodList();
 }
 
 const String cachedFoodList = 'CACHED_FOOD_LIST';
@@ -63,6 +63,9 @@ class SharedPrefFoodLocalDataSource implements FoodLocalDataSource {
       return Future.value(convertedJsonMapToFoodModelList);
     }
   }
+
+  @override
+  Future<void> emptySavedFoodList() => sharedPreferences.remove(cachedFoodList);
 
   String mergeFoodModelListAndJsonMapIntoString(
     List<FoodModel> foodModelList,

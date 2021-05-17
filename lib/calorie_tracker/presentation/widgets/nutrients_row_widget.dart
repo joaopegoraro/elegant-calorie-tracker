@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 
 import 'nutrient_widget.dart';
 
-class NutrientsRow extends StatefulWidget {
-  @override
-  _NutrientsRowState createState() => _NutrientsRowState();
-}
+class NutrientsRow extends StatelessWidget {
+  const NutrientsRow(
+      {Key? key, required this.carbs, required this.fat, required this.protein})
+      : super(key: key);
+  final double carbs;
+  final double fat;
+  final double protein;
 
-class _NutrientsRowState extends State<NutrientsRow> {
   @override
   Widget build(BuildContext context) {
     return Screen.isLandscape(context)
@@ -19,19 +21,19 @@ class _NutrientsRowState extends State<NutrientsRow> {
               NutrientWidget(
                 context,
                 nutrient: 'Carbs',
-                text: '250g',
+                text: '${carbs.toString()}g',
                 nutrientWidth: Screen.widthUnit(context) * 17,
               ),
               NutrientWidget(
                 context,
                 nutrient: 'Fat',
-                text: '60g',
+                text: '${fat.toString()}g',
                 nutrientWidth: Screen.widthUnit(context) * 17,
               ),
               NutrientWidget(
                 context,
                 nutrient: 'Protein',
-                text: '100g',
+                text: '${protein.toString()}g',
                 nutrientWidth: Screen.widthUnit(context) * 17,
               ),
             ],
@@ -43,19 +45,19 @@ class _NutrientsRowState extends State<NutrientsRow> {
               NutrientWidget(
                 context,
                 nutrient: 'Carbs',
-                text: '250g',
+                text: '${carbs.toString()}g',
                 nutrientWidth: Screen.widthUnit(context) * 27,
               ),
               NutrientWidget(
                 context,
                 nutrient: 'Fat',
-                text: '60g',
+                text: '${fat.toString()} g',
                 nutrientWidth: Screen.widthUnit(context) * 27,
               ),
               NutrientWidget(
                 context,
                 nutrient: 'Protein',
-                text: '100g',
+                text: '${protein.toString()}g',
                 nutrientWidth: Screen.widthUnit(context) * 27,
               ),
             ],

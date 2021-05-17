@@ -1,4 +1,4 @@
-import 'package:elegant_calorie_tracker/calorie_tracker/bloc/calorie_tracker_bloc.dart';
+import 'package:elegant_calorie_tracker/calorie_tracker/calorie_tracker_manager.dart';
 import 'package:elegant_calorie_tracker/calorie_tracker/data/datasources/food_local_data_source.dart';
 import 'package:elegant_calorie_tracker/calorie_tracker/data/datasources/food_remote_data_source.dart';
 import 'package:elegant_calorie_tracker/calorie_tracker/data/food_repository.dart';
@@ -24,9 +24,9 @@ Future<void> init() async {
   );
 
   //! Calorie Tracker
-  // Bloc
-  serviceLocator.registerFactory(
-    () => CalorieTrackerBloc(
+  // Provider
+  serviceLocator.registerFactory<CalorieTrackerManager>(
+    () => CalorieTrackerManager(
       repository: serviceLocator(),
     ),
   );

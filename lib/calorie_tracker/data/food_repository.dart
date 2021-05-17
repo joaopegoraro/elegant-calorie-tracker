@@ -9,6 +9,7 @@ import 'package:dartz/dartz.dart';
 abstract class FoodRepository {
   Future<Either<Failure, List<FoodModel>>> getFood(String query);
   Future<Either<Failure, List<FoodModel>>> getSavedFoods();
+  Future<void> emptySavedFoodList();
 }
 
 class DataFoodRepository implements FoodRepository {
@@ -47,5 +48,10 @@ class DataFoodRepository implements FoodRepository {
     } on CacheException {
       return Left(CacheFailure());
     }
+  }
+
+  @override
+  Future<void> emptySavedFoodList() async {
+    await localDataSource.emptySavedFoodList();
   }
 }

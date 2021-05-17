@@ -1,6 +1,6 @@
-import 'package:elegant_calorie_tracker/calorie_tracker/bloc/calorie_tracker_bloc.dart';
+import 'package:elegant_calorie_tracker/core/widgets/custom_button.dart';
+import 'package:elegant_calorie_tracker/core/widgets/custom_text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FoodSearch extends StatefulWidget {
   @override
@@ -12,19 +12,30 @@ class _FoodSearchState extends State<FoodSearch> {
   late String inputString;
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      onChanged: (value) {
-        inputString = value;
-      },
-      onSubmitted: (_) {
-        dispatchQuery();
-      },
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          width: 80,
+          child: TextField(
+            controller: controller,
+            onChanged: (value) {
+              inputString = value;
+            },
+            onSubmitted: (_) {
+              dispatchQuery();
+            },
+          ),
+        ),
+        CustomButton(
+          onPressed: () => clearColumn(),
+          child: const CustomTextWidget('Empty list'),
+        ),
+      ],
     );
   }
 
-  void dispatchQuery() {
-    controller.clear();
-    BlocProvider.of<CalorieTrackerBloc>(context).add(GetFood(inputString));
-  }
+  void dispatchQuery() {}
+
+  void clearColumn() {}
 }

@@ -6,6 +6,9 @@ import '../../../core/widgets/custom_text_widget.dart';
 
 /// Returns a Column containing the sum of the FoodColumn calories
 class CalorieCounter extends StatelessWidget {
+  const CalorieCounter({Key? key, required this.calories}) : super(key: key);
+  final double calories;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,7 +24,7 @@ class CalorieCounter extends StatelessWidget {
           height: Screen.heightUnit(context) * .65,
         ),
         CustomTextWidget(
-          '2400',
+          calories.toString(),
           color: Themes.cardBackground(context),
           fontSize: Screen.heightUnit(context) * 8,
         ),

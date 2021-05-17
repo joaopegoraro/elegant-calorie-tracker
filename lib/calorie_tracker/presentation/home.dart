@@ -1,4 +1,4 @@
-import 'package:elegant_calorie_tracker/calorie_tracker/bloc/calorie_tracker_bloc.dart';
+import 'package:elegant_calorie_tracker/calorie_tracker/calorie_tracker_manager.dart';
 import 'package:elegant_calorie_tracker/calorie_tracker/presentation/widgets/food_column_widget.dart';
 import 'package:elegant_calorie_tracker/calorie_tracker/presentation/widgets/food_search.dart';
 import 'package:elegant_calorie_tracker/core/utils/themes.dart';
@@ -8,7 +8,7 @@ import 'package:elegant_calorie_tracker/core/widgets/custom_text_widget.dart';
 import 'package:elegant_calorie_tracker/calorie_tracker/presentation/widgets/nutrients_row_widget.dart';
 import 'package:elegant_calorie_tracker/injection_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key, required this.appTitle}) : super(key: key);
@@ -86,81 +86,81 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
-    return BlocProvider(
-      create: (_) => serviceLocator<CalorieTrackerBloc>(),
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Calorie counter
-            SizedBox(
-              height: Screen.heightUnit(context) * 3,
-            ),
-            OrientationBuilder(builder: (context, Orientation orientation) {
-              switch (orientation) {
-                case Orientation.portrait:
-                  return Column(
-                    children: [
-                      CalorieCounter(),
-                      NutrientsRow(),
-                    ],
-                  );
-                case Orientation.landscape:
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CalorieCounter(),
-                      SizedBox(
-                        width: Screen.widthUnit(context) * 10,
-                      ),
-                      NutrientsRow(),
-                    ],
-                  );
-              }
-            }),
-            SizedBox(
-              height: Screen.isLandscape(context)
-                  ? Screen.heightUnit(context) * 2.5
-                  : Screen.heightUnit(context) * 1,
-            ),
-            Divider(
-              thickness: Screen.isLandscape(context)
-                  ? Screen.heightUnit(context) * 1
-                  : Screen.heightUnit(context) * .5,
-              indent: Screen.widthUnit(context) * 7.5,
-              endIndent: Screen.widthUnit(context) * 7.5,
-            ),
-            SizedBox(
-              height: Screen.isLandscape(context)
-                  ? Screen.heightUnit(context) * 2.5
-                  : Screen.heightUnit(context) * 1,
-            ),
-            // Text field
-            FoodSearch(),
-            SizedBox(
-              height: Screen.heightUnit(context) * 2,
-            ),
-            // Saved food column
-            BlocBuilder<CalorieTrackerBloc, CalorieTrackerState>(
-              builder: (context, state) {
-                if (state is NoSavedFood) {
-                  return const CustomTextWidget('No Food');
-                } else if (state is SavingFood) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state is FoodSaved) {
-                  return FoodColumn(foodModelList: state.savedFoods);
+    return Consumer<CalorieTrackerManager>(
+      builder: (context, manager, child) {
+        return SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Calorie counter
+              SizedBox(
+                height: Screen.heightUnit(context) * 3,
+              ),
+              OrientationBuilder(builder: (context, Orientation orientation) {
+                switch (orientation) {
+                  case Orientation.portrait:
+                    return Column(
+                      children: [
+                        CalorieCounter(
+                          calories: manager.calories,
+                        ),
+                        NutrientsRow(
+                          carbs: manager.carbs,
+                          fat: manager.fat,
+                          protein: manager.protein,
+                        ),
+                      ],
+                    );
+                  case Orientation.landscape:
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CalorieCounter(
+                          calories: manager.calories,
+                        ),
+                        SizedBox(
+                          width: Screen.widthUnit(context) * 10,
+                        ),
+                        NutrientsRow(
+                          carbs: manager.carbs,
+                          fat: manager.fat,
+                          protein: manager.protein,
+                        ),
+                      ],
+                    );
                 }
-                return const CustomTextWidget('error');
-              },
-            ),
-            SizedBox(
-              height: Screen.heightUnit(context) * 2,
-            ),
-          ],
-        ),
-      ),
+              }),
+              SizedBox(
+                height: Screen.isLandscape(context)
+                    ? Screen.heightUnit(context) * 2.5
+                    : Screen.heightUnit(context) * 1,
+              ),
+              Divider(
+                thickness: Screen.isLandscape(context)
+                    ? Screen.heightUnit(context) * 1
+                    : Screen.heightUnit(context) * .5,
+                indent: Screen.widthUnit(context) * 7.5,
+                endIndent: Screen.widthUnit(context) * 7.5,
+              ),
+              SizedBox(
+                height: Screen.isLandscape(context)
+                    ? Screen.heightUnit(context) * 2.5
+                    : Screen.heightUnit(context) * 1,
+              ),
+              // Text field
+              FoodSearch(),
+              SizedBox(
+                height: Screen.heightUnit(context) * 2,
+              ),
+              // Saved food column
+              FoodColumn(foodWidgetList: manager.foodWidgetList(context)),
+              SizedBox(
+                height: Screen.heightUnit(context) * 2,
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
