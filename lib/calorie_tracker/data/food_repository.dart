@@ -1,10 +1,11 @@
-import 'package:elegant_calorie_tracker/core/error/exception.dart';
-import 'package:elegant_calorie_tracker/core/utils/network_info.dart';
-import 'package:elegant_calorie_tracker/calorie_tracker/data/datasources/food_local_data_source.dart';
-import 'package:elegant_calorie_tracker/calorie_tracker/data/datasources/food_remote_data_source.dart';
-import 'package:elegant_calorie_tracker/calorie_tracker/data/food_model.dart';
-import 'package:elegant_calorie_tracker/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
+
+import '../../core/error/exception.dart';
+import '../../core/error/failures.dart';
+import '../../core/utils/network_info.dart';
+import 'datasources/food_local_data_source.dart';
+import 'datasources/food_remote_data_source.dart';
+import 'food_model.dart';
 
 abstract class FoodRepository {
   Future<Either<Failure, List<FoodModel>>> getFood(String query);

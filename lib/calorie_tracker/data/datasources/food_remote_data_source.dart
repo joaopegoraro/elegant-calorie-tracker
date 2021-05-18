@@ -1,9 +1,10 @@
 import 'dart:convert';
 
-import 'package:elegant_calorie_tracker/core/error/exception.dart';
-import 'package:elegant_calorie_tracker/core/utils/api.dart';
-import 'package:elegant_calorie_tracker/calorie_tracker/data/food_model.dart';
 import 'package:http/http.dart' as http;
+
+import '../../../core/error/exception.dart';
+import '../../../core/utils/api.dart';
+import '../food_model.dart';
 
 abstract class FoodRemoteDataSource {
   /// Calls the https://api.calorieninjas.com/v1/nutrition?query={query}

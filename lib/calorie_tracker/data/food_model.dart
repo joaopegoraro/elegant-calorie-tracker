@@ -1,5 +1,6 @@
-import 'package:elegant_calorie_tracker/core/utils/capitalizer.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../core/utils/capitalizer.dart';
 
 /// Food model which stores food properties
 class FoodModel extends Equatable {

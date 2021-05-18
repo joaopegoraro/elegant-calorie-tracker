@@ -1,7 +1,7 @@
-import 'package:elegant_calorie_tracker/core/utils/themes.dart';
-import 'package:elegant_calorie_tracker/core/utils/screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/utils/screen.dart';
+import '../../../core/utils/themes.dart';
 import '../../../core/widgets/custom_text_widget.dart';
 
 /// Returns a Column containing the sum of the FoodColumn calories

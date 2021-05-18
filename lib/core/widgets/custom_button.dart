@@ -8,15 +8,19 @@ class CustomButton extends StatelessWidget {
     Key? key,
     required this.onPressed,
     required this.child,
+    this.width,
+    this.height,
   }) : super(key: key);
   final VoidCallback onPressed;
   final Widget child;
+  final double? width;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: Screen.widthUnit(context) * 20,
-      height: Screen.widthUnit(context) * 10,
+      width: width ?? Screen.widthUnit(context) * 20,
+      height: width ?? Screen.widthUnit(context) * 12,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(primary: Themes.button(context)),

@@ -1,8 +1,9 @@
 import 'dart:convert';
 
-import 'package:elegant_calorie_tracker/core/error/exception.dart';
-import 'package:elegant_calorie_tracker/calorie_tracker/data/food_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../core/error/exception.dart';
+import '../food_model.dart';
 
 abstract class FoodLocalDataSource {
   /// Gets the saved foods

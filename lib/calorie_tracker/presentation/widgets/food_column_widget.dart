@@ -1,5 +1,6 @@
-import 'package:elegant_calorie_tracker/calorie_tracker/presentation/widgets/food_widget.dart';
 import 'package:flutter/material.dart';
+
+import 'food_widget.dart';
 
 class FoodColumn extends StatelessWidget {
   const FoodColumn({Key? key, required this.foodWidgetList}) : super(key: key);

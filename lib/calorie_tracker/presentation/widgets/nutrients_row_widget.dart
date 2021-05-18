@@ -1,6 +1,6 @@
-import 'package:elegant_calorie_tracker/core/utils/screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/utils/screen.dart';
 import 'nutrient_widget.dart';
 
 class NutrientsRow extends StatelessWidget {

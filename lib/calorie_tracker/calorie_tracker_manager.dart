@@ -1,8 +1,9 @@
-import 'package:elegant_calorie_tracker/calorie_tracker/data/food_model.dart';
-import 'package:elegant_calorie_tracker/calorie_tracker/data/food_repository.dart';
-import 'package:elegant_calorie_tracker/calorie_tracker/presentation/widgets/food_widget.dart';
-import 'package:elegant_calorie_tracker/core/error/failures.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+import '../core/error/failures.dart';
+import 'data/food_model.dart';
+import 'data/food_repository.dart';
+import 'presentation/widgets/food_widget.dart';
 
 const noConnectionMessage = 'Could not connected to the server';
 const foodNotFoundMessage = 'Could not find a food that matches your query';
@@ -17,34 +18,38 @@ class CalorieTrackerManager extends ChangeNotifier {
 
   //! Mutable Variables
   List<FoodModel> _foodModelList = [];
-  String? errorMessage;
+  String? _errorMessage;
+  bool _isLoading = false;
 
   //! Getters
   double get calories => _nutricionalInformation(NutrientType.calories);
   double get carbs => _nutricionalInformation(NutrientType.carbs);
   double get fat => _nutricionalInformation(NutrientType.fat);
   double get protein => _nutricionalInformation(NutrientType.protein);
+  String? get errorMessage => _errorMessage;
+  bool get isLoading => _isLoading;
 
   //! Public functions
   List<FoodWidget> getFoodWidgetList(BuildContext context) {
     final List<FoodWidget> _foodWidgetList = [];
     for (final FoodModel foodModel in _foodModelList) {
       _foodWidgetList.add(
-        FoodWidget(context, foodModel: foodModel),
+        FoodWidget(foodModel: foodModel),
       );
     }
     return _foodWidgetList;
   }
 
   Future<void> getFood(String query) async {
+    _setLoading(true);
     final eitherFailureOrList = await repository.getFood(query);
     _setFoodModelListToSavedList();
     eitherFailureOrList.fold(
       (failure) =>
           failure is ServerFailure ? noConnectionMessage : foodNotFoundMessage,
-      (list) => errorMessage = null,
+      (list) => _errorMessage = null,
     );
-    notifyListeners();
+    _setLoading(false);
   }
 
   Future<void> emptyFoodList() async {
@@ -59,6 +64,11 @@ class CalorieTrackerManager extends ChangeNotifier {
       (failure) => _foodModelList = [],
       (list) => _foodModelList = list,
     );
+    notifyListeners();
+  }
+
+  void _setLoading(bool boolean) {
+    _isLoading = boolean;
     notifyListeners();
   }
 
