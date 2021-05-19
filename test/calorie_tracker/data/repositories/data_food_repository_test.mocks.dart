@@ -4,11 +4,11 @@
 
 import 'dart:async' as _i3;
 
-import 'package:elegant_calorie_tracker/calorie_tracker/data/datasources/food_local_data_source.dart'
+import 'package:elegant_calorie_tracker/calorie_tracker_app/data/datasources/food_local_data_source.dart'
     as _i4;
-import 'package:elegant_calorie_tracker/calorie_tracker/data/datasources/food_remote_data_source.dart'
+import 'package:elegant_calorie_tracker/calorie_tracker_app/data/datasources/food_remote_data_source.dart'
     as _i6;
-import 'package:elegant_calorie_tracker/calorie_tracker/data/food_model.dart'
+import 'package:elegant_calorie_tracker/calorie_tracker_app/data/food_model.dart'
     as _i5;
 import 'package:elegant_calorie_tracker/core/utils/network_info.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;

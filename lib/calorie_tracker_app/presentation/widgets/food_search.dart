@@ -20,12 +20,12 @@ class FoodSearch extends StatefulWidget {
 }
 
 class _FoodSearchState extends State<FoodSearch> {
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   late String inputString;
 
   @override
   void dispose() {
-    controller.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -71,13 +71,13 @@ class _FoodSearchState extends State<FoodSearch> {
           fontSize: Screen.heightUnit(context) * 3.5,
         ),
         keyboardType: TextInputType.visiblePassword,
-        controller: controller,
+        controller: _controller,
         onChanged: (value) {
           inputString = value;
         },
         onSubmitted: (_) {
           _dispatchQuery(inputString, context);
-          controller.clear();
+          _controller.clear();
         });
   }
 

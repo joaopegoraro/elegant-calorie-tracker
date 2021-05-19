@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:elegant_calorie_tracker/core/error/exception.dart';
 import 'package:elegant_calorie_tracker/core/utils/api.dart';
-import 'package:elegant_calorie_tracker/calorie_tracker/data/datasources/food_remote_data_source.dart';
-import 'package:elegant_calorie_tracker/calorie_tracker/data/food_model.dart';
+import 'package:elegant_calorie_tracker/calorie_tracker_app/data/datasources/food_remote_data_source.dart';
+import 'package:elegant_calorie_tracker/calorie_tracker_app/data/food_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 

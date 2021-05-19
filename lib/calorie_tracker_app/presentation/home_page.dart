@@ -13,18 +13,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     debugPrint(Screen.size(context).toString());
-    final double barSize = Screen.isLandscape(context)
-        ? Screen.heightUnit(context) * 6.5
-        : Screen.heightUnit(context) * 7.5;
     return FutureBuilder(
         future: serviceLocator.allReady(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return Scaffold(
-            appBar: PreferredSize(
-                preferredSize: Size.fromHeight(barSize),
-                child: CalorieTrackerAppBar(
-                  appTitle: appTitle,
-                )),
             body: Container(
               // Adds the background pattern
               height: double.maxFinite,
@@ -41,10 +33,21 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               child: snapshot.hasData
-                  ? CalorieTracker()
+                  ? _buildChild(context, appTitle)
                   : const Center(child: CircularProgressIndicator()),
             ),
           );
         });
   }
+}
+
+Widget _buildChild(BuildContext context, String appTitle) {
+  return SingleChildScrollView(
+    child: Column(
+      children: [
+        CalorieTrackerAppBar(appTitle: appTitle),
+        CalorieTracker(),
+      ],
+    ),
+  );
 }

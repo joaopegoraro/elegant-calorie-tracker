@@ -3,10 +3,10 @@ import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'calorie_tracker/calorie_tracker_manager.dart';
-import 'calorie_tracker/data/datasources/food_local_data_source.dart';
-import 'calorie_tracker/data/datasources/food_remote_data_source.dart';
-import 'calorie_tracker/data/food_repository.dart';
+import 'calorie_tracker_app/calorie_tracker_manager.dart';
+import 'calorie_tracker_app/data/datasources/food_local_data_source.dart';
+import 'calorie_tracker_app/data/datasources/food_remote_data_source.dart';
+import 'calorie_tracker_app/data/food_repository.dart';
 import 'core/utils/network_info.dart';
 
 final serviceLocator = GetIt.instance;

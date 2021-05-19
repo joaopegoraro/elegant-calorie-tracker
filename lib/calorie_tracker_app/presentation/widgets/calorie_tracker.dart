@@ -1,10 +1,10 @@
+import 'package:elegant_calorie_tracker/calorie_tracker_app/presentation/widgets/food_information.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/utils/screen.dart';
 import '../../../injection_container.dart';
 import '../../calorie_tracker_manager.dart';
-import 'food_column_widget.dart';
 import 'food_search.dart';
 import 'food_widget.dart';
 import 'nutritional_counter.dart';
@@ -73,8 +73,9 @@ class CalorieTracker extends StatelessWidget {
     if (isLoading) {
       return const CircularProgressIndicator();
     }
-    return FoodColumn(
-      foodWidgetList: foodWidgetList,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: foodWidgetList,
     );
   }
 
