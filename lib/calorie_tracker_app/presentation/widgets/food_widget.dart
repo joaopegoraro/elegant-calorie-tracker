@@ -5,22 +5,23 @@ import '../../../core/utils/themes.dart';
 import '../../../core/widgets/custom_card/custom_card.dart';
 import '../../../core/widgets/custom_text_widget.dart';
 import '../../data/food_model.dart';
-import 'food_information.dart';
 
 /// Takes a Food object as a parameter and returns a card with its name and calories
 class FoodWidget extends StatelessWidget {
   final double? foodWidth;
   final FoodModel foodModel;
+  final Function(BuildContext, FoodModel) onTap;
   const FoodWidget({
     this.foodWidth,
     required this.foodModel,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _openFoodInformation(context);
+        onTap(context, foodModel);
       },
       child: _buildChild(context),
     );
@@ -50,15 +51,6 @@ class FoodWidget extends StatelessWidget {
             ],
           ),
         ],
-      ),
-    );
-  }
-
-  dynamic _openFoodInformation(BuildContext context) {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) => FoodInformation(
-        foodModel: foodModel,
       ),
     );
   }

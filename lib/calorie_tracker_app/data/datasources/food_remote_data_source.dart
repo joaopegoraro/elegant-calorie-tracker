@@ -10,6 +10,7 @@ abstract class FoodRemoteDataSource {
   /// Calls the https://api.calorieninjas.com/v1/nutrition?query={query}
   ///
   /// Throws a [ServerException] for all error codes.
+  /// Throws a [FoodNotFoundException] for empty responses
   Future<List<FoodModel>> getFood(String query);
 }
 

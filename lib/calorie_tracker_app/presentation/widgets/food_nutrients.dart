@@ -1,3 +1,5 @@
+import 'package:elegant_calorie_tracker/core/utils/screen.dart';
+import 'package:elegant_calorie_tracker/core/widgets/custom_card/custom_card.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/utils/themes.dart';
@@ -13,6 +15,7 @@ class FoodNutrients extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _nutrientNameColumn(context),
         _nutrientValueColumn(context, foodModel: foodModel),
@@ -47,6 +50,7 @@ class FoodNutrients extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        _nutrientName(context, name: "Serving Size"),
         _nutrientName(context, name: "Calories"),
         _nutrientName(context, name: "Sugar"),
         _nutrientName(context, name: "Fiber"),
@@ -66,6 +70,7 @@ class FoodNutrients extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
+        _buildServingSize(context),
         _nutrientValue(context, value: foodModel.calories, unit: 'kcal'),
         _nutrientValue(context, value: foodModel.sugar, unit: 'g'),
         _nutrientValue(context, value: foodModel.fiber, unit: 'g'),
@@ -76,6 +81,42 @@ class FoodNutrients extends StatelessWidget {
         _nutrientValue(context, value: foodModel.sodium, unit: 'mg'),
         _nutrientValue(context, value: foodModel.potassium, unit: 'mg'),
         _nutrientValue(context, value: foodModel.cholesterol, unit: 'mg'),
+      ],
+    );
+  }
+
+  Widget _buildServingSize(BuildContext context) {
+    return Row(
+      children: [
+        CustomCard(
+          paddingSides: Screen.widthUnit(context) * 0.5,
+          width: Screen.widthUnit(context) * 15,
+          height: Screen.heightUnit(context) * 3.5,
+          child: TextFormField(
+            onEditingComplete: () {
+              debugPrint("compelte");
+            },
+            maxLength: 4,
+            textAlign: TextAlign.center,
+            initialValue: foodModel.servingSize.toStringAsFixed(0),
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              counterText: '',
+              border: InputBorder.none,
+              isCollapsed: true,
+            ),
+            style: TextStyle(
+              color: Themes.cardContent(context),
+              decoration: TextDecoration.none,
+              fontWeight: FontWeight.bold,
+              fontSize: Screen.heightUnit(context) * 2.5,
+            ),
+          ),
+        ),
+        CustomTextWidget(
+          'g ',
+          color: Themes.cardHeader(context),
+        ),
       ],
     );
   }

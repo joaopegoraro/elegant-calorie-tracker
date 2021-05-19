@@ -8,10 +8,11 @@ import '../food_model.dart';
 abstract class FoodLocalDataSource {
   /// Gets the saved foods
   ///
-  /// Throws [NoLocalDataException] if no cached data is present.
+  /// Throws [CacheException] if no cached data is present.
   Future<List<FoodModel>> getSavedFoods();
   Future<void> saveFoods(List<FoodModel> foodToCache);
   Future<void> emptySavedFoodList();
+  Future<void> removeSavedFood(int index);
 }
 
 const String cachedFoodList = 'CACHED_FOOD_LIST';
@@ -67,6 +68,14 @@ class SharedPrefFoodLocalDataSource implements FoodLocalDataSource {
 
   @override
   Future<void> emptySavedFoodList() => sharedPreferences.remove(cachedFoodList);
+
+  @override
+  Future<void> removeSavedFood(int index) async {
+    final List<FoodModel> foodModelList = await getSavedFoods();
+    foodModelList.removeAt(index);
+    emptySavedFoodList();
+    saveFoods(foodModelList);
+  }
 
   String mergeFoodModelListAndJsonMapIntoString(
     List<FoodModel> foodModelList,

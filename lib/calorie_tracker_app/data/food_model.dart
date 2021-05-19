@@ -16,8 +16,10 @@ class FoodModel extends Equatable {
   final double sodium;
   final double potassium;
   final double cholesterol;
+  final int index;
 
-  const FoodModel({
+  const FoodModel(
+    this.index, {
     required this.name,
     required this.servingSize,
     required this.calories,
@@ -57,9 +59,10 @@ class FoodModel extends Equatable {
     }
     // Otherwise return a list with FoodModels made from the 'items' maps
     final List<FoodModel> finalList = [];
-    for (final dynamic foodMap in items) {
-      foodMap as Map;
+    for (int _index = 0; _index < items.length; _index++) {
+      final foodMap = items[_index];
       finalList.add(FoodModel(
+        _index,
         name: capitalize(foodMap["name"].toString()),
         servingSize: foodMap["serving_size_g"].toDouble() as double,
         calories: foodMap["calories"].toDouble() as double,

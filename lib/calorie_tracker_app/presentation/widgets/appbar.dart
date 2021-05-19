@@ -47,7 +47,9 @@ class CalorieTrackerAppBar extends StatelessWidget {
           ),
           IconButton(
             icon: const Icon(Icons.settings),
-            onPressed: () {},
+            onPressed: () {
+              debugPrint('settings');
+            },
             color: Themes.header(context),
             iconSize: Screen.heightUnit(context) * 3.5,
           ),

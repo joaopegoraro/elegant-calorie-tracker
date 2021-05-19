@@ -28,17 +28,9 @@ class CalorieTrackerManager extends ChangeNotifier {
   double get protein => _nutricionalInformation(NutrientType.protein);
   String? get errorMessage => _errorMessage;
   bool get isLoading => _isLoading;
+  List<FoodModel> get foodModelList => _foodModelList;
 
   //! Public functions
-  List<FoodWidget> getFoodWidgetList(BuildContext context) {
-    final List<FoodWidget> _foodWidgetList = [];
-    for (final FoodModel foodModel in _foodModelList) {
-      _foodWidgetList.add(
-        FoodWidget(foodModel: foodModel),
-      );
-    }
-    return _foodWidgetList;
-  }
 
   Future<void> getFood(String query) async {
     _setLoading(true);
@@ -54,6 +46,11 @@ class CalorieTrackerManager extends ChangeNotifier {
 
   Future<void> emptyFoodList() async {
     repository.emptySavedFoodList();
+    _setFoodModelListToSavedList();
+  }
+
+  Future<void> removeFood(int index) async {
+    await repository.removeSavedFood(index);
     _setFoodModelListToSavedList();
   }
 
