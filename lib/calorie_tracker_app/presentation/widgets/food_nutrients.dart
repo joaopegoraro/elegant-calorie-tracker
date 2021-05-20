@@ -1,9 +1,11 @@
 import 'package:elegant_calorie_tracker/core/utils/screen.dart';
 import 'package:elegant_calorie_tracker/core/widgets/custom_card/custom_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/utils/themes.dart';
 import '../../../core/widgets/custom_text_widget.dart';
+import '../../calorie_tracker_manager.dart';
 import '../../data/food_model.dart';
 
 enum FoodNutrientType { carbs, fatAndProtein, microNutrient }
@@ -86,6 +88,8 @@ class FoodNutrients extends StatelessWidget {
   }
 
   Widget _buildServingSize(BuildContext context) {
+    TextEditingController _controller = TextEditingController();
+    _controller.text = foodModel.servingSize.toStringAsFixed(0);
     return Row(
       children: [
         CustomCard(
@@ -93,12 +97,17 @@ class FoodNutrients extends StatelessWidget {
           width: Screen.widthUnit(context) * 15,
           height: Screen.heightUnit(context) * 3.5,
           child: TextFormField(
+            controller: _controller,
             onEditingComplete: () {
-              debugPrint("compelte");
+              Provider.of<CalorieTrackerManager>(context, listen: false)
+                  .editFood(
+                foodModel.index,
+                double.parse(_controller.text),
+              );
+              Navigator.pop(context, 'Remove');
             },
             maxLength: 4,
             textAlign: TextAlign.center,
-            initialValue: foodModel.servingSize.toStringAsFixed(0),
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(
               counterText: '',

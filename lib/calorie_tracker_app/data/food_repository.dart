@@ -12,6 +12,7 @@ abstract class FoodRepository {
   Future<Either<Failure, List<FoodModel>>> getSavedFoods();
   Future<void> emptySavedFoodList();
   Future<void> removeSavedFood(int index);
+  Future<void> editFood(int index, double newServingSize);
 }
 
 class DataFoodRepository implements FoodRepository {
@@ -60,5 +61,10 @@ class DataFoodRepository implements FoodRepository {
   @override
   Future<void> removeSavedFood(int index) async {
     await localDataSource.removeSavedFood(index);
+  }
+
+  @override
+  Future<void> editFood(int index, double newServingSize) async {
+    await localDataSource.editSavedFood(index, newServingSize);
   }
 }

@@ -54,6 +54,11 @@ class CalorieTrackerManager extends ChangeNotifier {
     _setFoodModelListToSavedList();
   }
 
+  Future<void> editFood(int index, double servingSize) async {
+    await repository.editFood(index, servingSize);
+    _setFoodModelListToSavedList();
+  }
+
   //! Private functions
   Future<void> _setFoodModelListToSavedList() async {
     final failureOrList = await repository.getSavedFoods();

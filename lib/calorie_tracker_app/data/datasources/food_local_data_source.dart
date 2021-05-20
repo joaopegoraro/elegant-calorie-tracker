@@ -13,6 +13,7 @@ abstract class FoodLocalDataSource {
   Future<void> saveFoods(List<FoodModel> foodToCache);
   Future<void> emptySavedFoodList();
   Future<void> removeSavedFood(int index);
+  Future<void> editSavedFood(int index, double newServingSize);
 }
 
 const String cachedFoodList = 'CACHED_FOOD_LIST';
@@ -74,6 +75,31 @@ class SharedPrefFoodLocalDataSource implements FoodLocalDataSource {
     final List<FoodModel> foodModelList = await getSavedFoods();
     foodModelList.removeAt(index);
     emptySavedFoodList();
+    saveFoods(foodModelList);
+  }
+
+  @override
+  Future<void> editSavedFood(int index, double newServingSize) async {
+    final List<FoodModel> foodModelList = await getSavedFoods();
+    final FoodModel oldFoodModel = foodModelList[index];
+    emptySavedFoodList();
+    final double ratio = newServingSize / oldFoodModel.servingSize;
+    final FoodModel editedFoodModel = FoodModel(
+      index,
+      name: oldFoodModel.name,
+      servingSize: oldFoodModel.servingSize * ratio,
+      calories: oldFoodModel.calories * ratio,
+      sugar: oldFoodModel.sugar * ratio,
+      fiber: oldFoodModel.fiber * ratio,
+      totalCarbs: oldFoodModel.totalCarbs * ratio,
+      saturatedFat: oldFoodModel.saturatedFat * ratio,
+      totalFat: oldFoodModel.totalFat * ratio,
+      protein: oldFoodModel.protein * ratio,
+      sodium: oldFoodModel.sodium * ratio,
+      potassium: oldFoodModel.potassium * ratio,
+      cholesterol: oldFoodModel.cholesterol * ratio,
+    );
+    foodModelList[index] = editedFoodModel;
     saveFoods(foodModelList);
   }
 
