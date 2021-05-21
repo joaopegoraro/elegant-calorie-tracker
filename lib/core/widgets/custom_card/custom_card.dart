@@ -1,4 +1,3 @@
-import 'package:elegant_calorie_tracker/core/utils/themes.dart';
 import 'package:elegant_calorie_tracker/core/utils/screen.dart';
 import 'package:flutter/material.dart';
 
@@ -25,6 +24,7 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final double defaultSidePadding = Screen.isLandscape(context)
         ? Screen.widthUnit(context) * 2
         : Screen.widthUnit(context) * 4;
@@ -35,8 +35,8 @@ class CustomCard extends StatelessWidget {
         ? Screen.heightUnit(context) * 8.5
         : Screen.heightUnit(context) * 11;
     return Card(
-      shadowColor: Themes.dark,
-      color: Themes.cardBackground(context),
+      shadowColor: theme.primaryColorDark,
+      color: theme.cardColor,
       shape: RoundedRectangleBorder(
           borderRadius: (borderRadius != null)
               ? BorderRadius.circular(borderRadius!)

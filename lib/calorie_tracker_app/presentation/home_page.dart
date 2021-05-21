@@ -1,7 +1,7 @@
+import 'package:elegant_calorie_tracker/calorie_tracker_app/presentation/widgets/settings_drawer.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/utils/screen.dart';
-import '../../core/utils/themes.dart';
 import '../../injection_container.dart';
 import 'widgets/appbar.dart';
 import 'widgets/calorie_tracker.dart';
@@ -13,10 +13,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     debugPrint(Screen.size(context).toString());
+    final theme = Theme.of(context);
     return FutureBuilder(
         future: serviceLocator.allReady(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return Scaffold(
+            endDrawer: SettingsDrawer(),
             body: Container(
               // Adds the background pattern
               height: double.maxFinite,
@@ -27,8 +29,8 @@ class HomeScreen extends StatelessWidget {
                   end: Alignment.bottomRight,
                   stops: const [0.5, 0.5],
                   colors: [
-                    Themes.mainBackground(context),
-                    Themes.secondaryBackground(context),
+                    theme.dialogBackgroundColor,
+                    theme.backgroundColor,
                   ],
                 ),
               ),

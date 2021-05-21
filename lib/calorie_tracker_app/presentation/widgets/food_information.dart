@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:elegant_calorie_tracker/calorie_tracker_app/calorie_tracker_manager.dart';
 import 'package:elegant_calorie_tracker/calorie_tracker_app/data/models/food_model.dart';
 import 'package:elegant_calorie_tracker/calorie_tracker_app/presentation/widgets/food_nutrients.dart';
-import 'package:elegant_calorie_tracker/core/utils/themes.dart';
 import 'package:elegant_calorie_tracker/core/widgets/custom_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,12 +16,13 @@ class FoodInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return FittedBox(
       child: AlertDialog(
-        backgroundColor: Themes.mainBackground(context),
+        backgroundColor: theme.dialogBackgroundColor,
         title: CustomTextWidget(
           '${foodModel.name} ',
-          color: Themes.cardHeader(context),
+          color: theme.secondaryHeaderColor,
         ),
         content: SingleChildScrollView(
           child: FittedBox(
@@ -40,14 +40,14 @@ class FoodInformation extends StatelessWidget {
             },
             child: CustomTextWidget(
               'Remove',
-              color: Themes.cardHeader(context),
+              color: theme.secondaryHeaderColor,
             ),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, 'Close'),
             child: CustomTextWidget(
               'Close',
-              color: Themes.cardHeader(context),
+              color: theme.secondaryHeaderColor,
             ),
           ),
         ],

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/utils/screen.dart';
-import '../../../core/utils/themes.dart';
 import '../../../core/widgets/custom_text_widget.dart';
 
 class CalorieTrackerAppBar extends StatelessWidget {
@@ -13,6 +12,7 @@ class CalorieTrackerAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return SafeArea(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -22,7 +22,7 @@ class CalorieTrackerAppBar extends StatelessWidget {
             child: IconButton(
               icon: const Icon(Icons.settings),
               onPressed: () {},
-              color: Themes.header(context),
+              color: theme.primaryColor,
               iconSize: Screen.heightUnit(context) * 3.5,
             ),
           ),
@@ -30,7 +30,7 @@ class CalorieTrackerAppBar extends StatelessWidget {
             children: [
               CustomTextWidget(
                 'G',
-                color: Themes.header(context),
+                color: theme.primaryColor,
                 fontWeight: FontWeight.normal,
                 fontSize: Screen.heightUnit(context) * 6.5,
                 fontFamily: 'Doodle',
@@ -40,7 +40,7 @@ class CalorieTrackerAppBar extends StatelessWidget {
               ),
               CustomTextWidget(
                 appTitle,
-                color: Themes.header(context),
+                color: theme.primaryColor,
                 fontSize: Screen.heightUnit(context) * 3.5,
               ),
             ],
@@ -48,9 +48,9 @@ class CalorieTrackerAppBar extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
-              debugPrint('settings');
+              Scaffold.of(context).openEndDrawer();
             },
-            color: Themes.header(context),
+            color: theme.primaryColor,
             iconSize: Screen.heightUnit(context) * 3.5,
           ),
         ],

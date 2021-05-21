@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
 
 class LightTheme {
-  /// Colors.brown[600]
+  /// Colors.brown[600] OK
   static const Color header = Color(0xFF6D4C41);
 
-  /// Colors.brown[600]
+  /// Colors.brown[600] OK
   static const Color button = Color(0xFF6D4C41);
 
-  /// Colors.brown[800]
+  /// Colors.brown[800] OK
   static const Color cardHeader = Color(0xFF4E342E);
 
-  /// Colors.brown[600]
+  /// Colors.brown[600] OK
   static const Color cardContent = Color(0xFF6D4C41);
 
-  /// Colors.brown[800]
+  /// Colors.brown[800] OK
   static const Color cardConstantUnit = Color(0xFF4E342E);
 
-  /// Colors.grey[100]
+  /// Colors.grey[100] OK
   static const Color cardBackground = Color(0xFFF5F5F5);
 
-  /// Colors.brown[200]
+  /// Colors.brown[200] Ok
   static const Color mainBackground = Color(0xFFBCAAA4);
 
-  /// Colors.brown[300]
+  /// Colors.brown[300] Ok
   static const Color secondaryBackground = Color(0xFFA1887F);
 
-  /// Colors.brown[800]
+  /// Colors.brown[800] OK
   static const Color constantUnit = Color(0xFF4E342E);
 }
 
@@ -59,55 +59,34 @@ class DarkTheme {
 }
 
 /// Static class that contains the theme colors
-class Themes {
-  static const MaterialColor swatch = Colors.brown;
+final ThemeData lightTheme = ThemeData(
+  brightness: Brightness.light,
+  fontFamily: 'Aladin',
+  primarySwatch: swatch,
+  primaryColor: LightTheme.header,
+  secondaryHeaderColor: LightTheme.cardHeader,
+  cardColor: LightTheme.cardBackground,
+  dialogBackgroundColor: LightTheme.mainBackground,
+  backgroundColor: LightTheme.secondaryBackground,
+  primaryColorLight: light,
+  primaryColorDark: dark,
+);
 
-  /// Colors.white
-  static const Color light = Color(0xFFFFFFFF);
+final ThemeData darkTheme = ThemeData(
+  brightness: Brightness.dark,
+  fontFamily: 'Aladin',
+  primarySwatch: swatch,
+  primaryColor: DarkTheme.header,
+  secondaryHeaderColor: DarkTheme.cardHeader,
+  cardColor: DarkTheme.cardBackground,
+  dialogBackgroundColor: DarkTheme.mainBackground,
+  backgroundColor: DarkTheme.secondaryBackground,
+);
 
-  /// Colors.black
-  static const Color dark = Color(0xFF000000);
+const MaterialColor swatch = Colors.brown;
 
-  static bool isDarkMode(BuildContext context) =>
-      MediaQuery.of(context).platformBrightness == Brightness.dark;
+/// Colors.white
+const Color light = Color(0xFFFFFFFF);
 
-  /// LightMode: brown[600] | Darkmode: brown[200]
-  static Color header(BuildContext context) =>
-      isDarkMode(context) ? DarkTheme.header : LightTheme.header;
-
-  /// LightMode: brown[600] | Darkmode: brown[200]
-  static Color button(BuildContext context) =>
-      isDarkMode(context) ? DarkTheme.button : LightTheme.button;
-
-  /// LightMode: brown[800] | Darkmode: brown[300]
-  static Color cardHeader(BuildContext context) =>
-      isDarkMode(context) ? DarkTheme.cardHeader : LightTheme.cardHeader;
-
-  /// LightMode: brown[800] | Darkmode: brown[300]
-  static Color cardContent(BuildContext context) =>
-      isDarkMode(context) ? DarkTheme.cardContent : LightTheme.cardContent;
-
-  /// LightMode: brown[800] | Darkmode: brown[300]
-  static Color cardConstantUnit(BuildContext context) => isDarkMode(context)
-      ? DarkTheme.cardConstantUnit
-      : LightTheme.cardConstantUnit;
-
-  /// LightMode: grey[100] | Darkmode: grey[900]
-  static Color cardBackground(BuildContext context) => isDarkMode(context)
-      ? DarkTheme.cardBackground
-      : LightTheme.cardBackground;
-
-  /// LightMode: brown[200] | Darkmode: brown[600]
-  static Color mainBackground(BuildContext context) => isDarkMode(context)
-      ? DarkTheme.mainBackground
-      : LightTheme.mainBackground;
-
-  /// LightMode: brown[300] | Darkmode: brown[800]
-  static Color secondaryBackground(BuildContext context) => isDarkMode(context)
-      ? DarkTheme.secondaryBackground
-      : LightTheme.secondaryBackground;
-
-  /// LightMode: brown[300] | Darkmode: brown[800]
-  static Color constantUnit(BuildContext context) =>
-      isDarkMode(context) ? DarkTheme.constantUnit : LightTheme.constantUnit;
-}
+/// Colors.black
+const Color dark = Color(0xFF000000);

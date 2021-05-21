@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/utils/screen.dart';
-import '../../../core/utils/themes.dart';
 import '../../../core/widgets/custom_text_widget.dart';
 
 /// Returns a Column containing the sum of the FoodColumn calories
@@ -11,12 +10,13 @@ class CalorieCounter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CustomTextWidget(
           'Calories',
-          color: Themes.header(context),
+          color: theme.primaryColor,
           fontSize: Screen.heightUnit(context) * 7,
           shadowColor: Colors.black,
         ),
@@ -25,12 +25,12 @@ class CalorieCounter extends StatelessWidget {
         ),
         CustomTextWidget(
           calories.toStringAsFixed(1),
-          color: Themes.cardBackground(context),
+          color: theme.cardColor,
           fontSize: Screen.heightUnit(context) * 8,
         ),
         CustomTextWidget(
           'kcal',
-          color: Themes.constantUnit(context),
+          color: theme.secondaryHeaderColor,
           fontSize: Screen.heightUnit(context) * 3.5,
         ),
         SizedBox(

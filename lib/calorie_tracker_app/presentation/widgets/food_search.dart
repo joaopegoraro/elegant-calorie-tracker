@@ -1,4 +1,3 @@
-import 'package:elegant_calorie_tracker/core/utils/themes.dart';
 import 'package:elegant_calorie_tracker/core/widgets/custom_button.dart';
 import 'package:elegant_calorie_tracker/core/widgets/custom_card/custom_card.dart';
 import 'package:elegant_calorie_tracker/core/widgets/custom_text_widget.dart';
@@ -54,6 +53,7 @@ class _FoodSearchState extends State<FoodSearch> {
   }
 
   Widget _buildTextField(BuildContext context) {
+    final theme = Theme.of(context);
     return TextField(
         textAlign: TextAlign.center,
         decoration: InputDecoration(
@@ -61,11 +61,11 @@ class _FoodSearchState extends State<FoodSearch> {
           border: InputBorder.none,
           isCollapsed: true,
           hintStyle: TextStyle(
-            color: Themes.cardContent(context),
+            color: theme.primaryColor,
           ),
         ),
         style: TextStyle(
-          color: Themes.cardHeader(context),
+          color: theme.secondaryHeaderColor,
           decoration: TextDecoration.none,
           fontWeight: FontWeight.bold,
           fontSize: Screen.heightUnit(context) * 3.5,

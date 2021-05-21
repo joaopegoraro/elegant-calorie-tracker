@@ -1,4 +1,3 @@
-import 'package:elegant_calorie_tracker/core/utils/themes.dart';
 import 'package:elegant_calorie_tracker/core/utils/screen.dart';
 import 'package:flutter/material.dart';
 
@@ -18,12 +17,15 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return SizedBox(
       width: width ?? Screen.widthUnit(context) * 20,
       height: width ?? Screen.widthUnit(context) * 12,
       child: ElevatedButton(
         onPressed: onPressed,
-        style: ElevatedButton.styleFrom(primary: Themes.button(context)),
+        style: ElevatedButton.styleFrom(
+          primary: theme.primaryColor,
+        ),
         child: child,
       ),
     );

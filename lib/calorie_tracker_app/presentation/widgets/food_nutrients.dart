@@ -5,7 +5,6 @@ import 'package:elegant_calorie_tracker/core/widgets/custom_card/custom_card.dar
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/utils/themes.dart';
 import '../../../core/widgets/custom_text_widget.dart';
 import '../../calorie_tracker_manager.dart';
 import '../../data/models/food_model.dart';
@@ -33,23 +32,25 @@ class FoodNutrients extends StatelessWidget {
   }
 
   Widget _nutrientName(BuildContext context, {required String name}) {
+    final theme = Theme.of(context);
     return CustomTextWidget(
       "$name: ",
-      color: Themes.cardHeader(context),
+      color: theme.secondaryHeaderColor,
     );
   }
 
   Widget _nutrientValue(BuildContext context,
       {required double value, required String unit}) {
+    final theme = Theme.of(context);
     return Row(
       children: [
         CustomTextWidget(
           value.toStringAsFixed(1),
-          color: Themes.cardContent(context),
+          color: theme.primaryColor,
         ),
         CustomTextWidget(
           unit,
-          color: Themes.cardConstantUnit(context),
+          color: theme.secondaryHeaderColor,
         ),
       ],
     );
@@ -120,6 +121,7 @@ class FoodNutrients extends StatelessWidget {
   Widget _buildServingSize(BuildContext context, FoodModel foodModel) {
     final TextEditingController _controller = TextEditingController();
     _controller.text = foodModel.servingSize.toStringAsFixed(0);
+    final theme = Theme.of(context);
     return Row(
       children: [
         CustomCard(
@@ -145,7 +147,7 @@ class FoodNutrients extends StatelessWidget {
               isCollapsed: true,
             ),
             style: TextStyle(
-              color: Themes.cardContent(context),
+              color: theme.primaryColor,
               decoration: TextDecoration.none,
               fontWeight: FontWeight.bold,
               fontSize: Screen.heightUnit(context) * 2.5,
@@ -154,7 +156,7 @@ class FoodNutrients extends StatelessWidget {
         ),
         CustomTextWidget(
           'g ',
-          color: Themes.cardHeader(context),
+          color: theme.secondaryHeaderColor,
         ),
       ],
     );

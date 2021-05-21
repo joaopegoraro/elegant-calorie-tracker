@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/utils/screen.dart';
-import '../../../core/utils/themes.dart';
 import '../../../core/widgets/custom_card/custom_card.dart';
 import '../../../core/widgets/custom_text_widget.dart';
 
@@ -13,18 +11,17 @@ class NutrientWidget extends CustomCard {
     required this.nutrient,
     required this.text,
   }) : super(
-          width: nutrientWidth ?? Screen.widthUnit(context) * 20,
           child: FittedBox(
             fit: BoxFit.fill,
             child: Column(
               children: [
                 CustomTextWidget(
                   nutrient,
-                  color: Themes.cardHeader(context),
+                  color: Theme.of(context).secondaryHeaderColor,
                 ),
                 CustomTextWidget(
                   text,
-                  color: Themes.cardContent(context),
+                  color: Theme.of(context).primaryColor,
                 ),
               ],
             ),

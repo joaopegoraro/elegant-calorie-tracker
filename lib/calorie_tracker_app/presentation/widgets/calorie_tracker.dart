@@ -1,7 +1,6 @@
 import 'package:elegant_calorie_tracker/calorie_tracker_app/data/models/food_model.dart';
 import 'package:elegant_calorie_tracker/calorie_tracker_app/data/models/nutritional_model.dart';
 import 'package:elegant_calorie_tracker/calorie_tracker_app/presentation/widgets/total_nutritional_information.dart';
-import 'package:elegant_calorie_tracker/core/utils/themes.dart';
 import 'package:elegant_calorie_tracker/core/widgets/custom_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -114,16 +113,17 @@ class CalorieTracker extends StatelessWidget {
   }
 
   Future<void> _searchFood(BuildContext context, String inputString) async {
+    final theme = Theme.of(context);
     await Provider.of<CalorieTrackerManager>(context, listen: false)
         .getFood(inputString);
     final String _errorMessage =
         Provider.of<CalorieTrackerManager>(context, listen: false).errorMessage;
     if (_errorMessage.isNotEmpty) {
       final snackBar = SnackBar(
-        backgroundColor: Themes.cardHeader(context),
+        backgroundColor: theme.secondaryHeaderColor,
         content: CustomTextWidget(
           _errorMessage,
-          color: Themes.cardBackground(context),
+          color: theme.cardColor,
         ),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
