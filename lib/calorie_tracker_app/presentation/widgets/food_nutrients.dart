@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+import 'package:elegant_calorie_tracker/calorie_tracker_app/data/models/nutritional_model.dart';
 import 'package:elegant_calorie_tracker/core/utils/screen.dart';
 import 'package:elegant_calorie_tracker/core/widgets/custom_card/custom_card.dart';
 import 'package:flutter/material.dart';
@@ -6,13 +8,13 @@ import 'package:provider/provider.dart';
 import '../../../core/utils/themes.dart';
 import '../../../core/widgets/custom_text_widget.dart';
 import '../../calorie_tracker_manager.dart';
-import '../../data/food_model.dart';
+import '../../data/models/food_model.dart';
 
 enum FoodNutrientType { carbs, fatAndProtein, microNutrient }
 
 class FoodNutrients extends StatelessWidget {
-  const FoodNutrients({Key? key, required this.foodModel}) : super(key: key);
-  final FoodModel foodModel;
+  const FoodNutrients({Key? key, required this.model}) : super(key: key);
+  final Either<FoodModel, NutritionalModel> model;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,12 @@ class FoodNutrients extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _nutrientNameColumn(context),
-        _nutrientValueColumn(context, foodModel: foodModel),
+        model.fold(
+          (foodModel) =>
+              _nutrientValueColumn(context, eitherModel: Left(foodModel)),
+          (nutritionalModel) => _nutrientValueColumn(context,
+              eitherModel: Right(nutritionalModel)),
+        )
       ],
     );
   }
@@ -52,7 +59,10 @@ class FoodNutrients extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _nutrientName(context, name: "Serving Size"),
+        model.fold(
+          (foodModel) => _nutrientName(context, name: "Serving Size"),
+          (nutritionalModel) => Container(),
+        ),
         _nutrientName(context, name: "Calories"),
         _nutrientName(context, name: "Sugar"),
         _nutrientName(context, name: "Fiber"),
@@ -68,27 +78,47 @@ class FoodNutrients extends StatelessWidget {
   }
 
   Widget _nutrientValueColumn(BuildContext context,
-      {required FoodModel foodModel}) {
+      {required Either<FoodModel, NutritionalModel> eitherModel}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        _buildServingSize(context),
-        _nutrientValue(context, value: foodModel.calories, unit: 'kcal'),
-        _nutrientValue(context, value: foodModel.sugar, unit: 'g'),
-        _nutrientValue(context, value: foodModel.fiber, unit: 'g'),
-        _nutrientValue(context, value: foodModel.totalCarbs, unit: 'g'),
-        _nutrientValue(context, value: foodModel.saturatedFat, unit: 'g'),
-        _nutrientValue(context, value: foodModel.totalFat, unit: 'g'),
-        _nutrientValue(context, value: foodModel.protein, unit: 'g'),
-        _nutrientValue(context, value: foodModel.sodium, unit: 'mg'),
-        _nutrientValue(context, value: foodModel.potassium, unit: 'mg'),
-        _nutrientValue(context, value: foodModel.cholesterol, unit: 'mg'),
-      ],
+      children: eitherModel.fold((foodModel) {
+        return [
+          _buildServingSize(context, foodModel),
+          _nutrientValue(context, value: foodModel.calories, unit: 'kcal'),
+          _nutrientValue(context, value: foodModel.sugar, unit: 'g'),
+          _nutrientValue(context, value: foodModel.fiber, unit: 'g'),
+          _nutrientValue(context, value: foodModel.totalCarbs, unit: 'g'),
+          _nutrientValue(context, value: foodModel.saturatedFat, unit: 'g'),
+          _nutrientValue(context, value: foodModel.totalFat, unit: 'g'),
+          _nutrientValue(context, value: foodModel.protein, unit: 'g'),
+          _nutrientValue(context, value: foodModel.sodium, unit: 'mg'),
+          _nutrientValue(context, value: foodModel.potassium, unit: 'mg'),
+          _nutrientValue(context, value: foodModel.cholesterol, unit: 'mg'),
+        ];
+      }, (nutritionalModel) {
+        return [
+          _nutrientValue(context,
+              value: nutritionalModel.calories, unit: 'kcal'),
+          _nutrientValue(context, value: nutritionalModel.sugar, unit: 'g'),
+          _nutrientValue(context, value: nutritionalModel.fiber, unit: 'g'),
+          _nutrientValue(context,
+              value: nutritionalModel.totalCarbs, unit: 'g'),
+          _nutrientValue(context,
+              value: nutritionalModel.saturatedFat, unit: 'g'),
+          _nutrientValue(context, value: nutritionalModel.totalFat, unit: 'g'),
+          _nutrientValue(context, value: nutritionalModel.protein, unit: 'g'),
+          _nutrientValue(context, value: nutritionalModel.sodium, unit: 'mg'),
+          _nutrientValue(context,
+              value: nutritionalModel.potassium, unit: 'mg'),
+          _nutrientValue(context,
+              value: nutritionalModel.cholesterol, unit: 'mg'),
+        ];
+      }),
     );
   }
 
-  Widget _buildServingSize(BuildContext context) {
-    TextEditingController _controller = TextEditingController();
+  Widget _buildServingSize(BuildContext context, FoodModel foodModel) {
+    final TextEditingController _controller = TextEditingController();
     _controller.text = foodModel.servingSize.toStringAsFixed(0);
     return Row(
       children: [

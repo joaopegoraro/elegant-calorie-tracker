@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
 
 import '../core/error/failures.dart';
-import 'data/food_model.dart';
 import 'data/food_repository.dart';
-import 'presentation/widgets/food_widget.dart';
+import 'data/models/food_model.dart';
+import 'data/models/nutritional_model.dart';
 
-const noConnectionMessage = 'Could not connected to the server';
+const noConnectionMessage = 'Could not connect to the server';
 const foodNotFoundMessage = 'Could not find a food that matches your query';
 
-enum NutrientType { calories, carbs, fat, protein }
+enum NutrientType {
+  calories,
+  sugar,
+  fiber,
+  totalCarbs,
+  saturatedFat,
+  totalFat,
+  protein,
+  sodium,
+  potassium,
+  cholesterol,
+}
 
 class CalorieTrackerManager extends ChangeNotifier {
   final FoodRepository repository;
@@ -18,15 +29,13 @@ class CalorieTrackerManager extends ChangeNotifier {
 
   //! Mutable Variables
   List<FoodModel> _foodModelList = [];
-  String? _errorMessage;
+  String _errorMessage = '';
   bool _isLoading = false;
 
   //! Getters
-  double get calories => _nutricionalInformation(NutrientType.calories);
-  double get carbs => _nutricionalInformation(NutrientType.carbs);
-  double get fat => _nutricionalInformation(NutrientType.fat);
-  double get protein => _nutricionalInformation(NutrientType.protein);
-  String? get errorMessage => _errorMessage;
+  NutritionalModel get nutritionalModel =>
+      _createNutritionalModel(_foodModelList);
+  String get errorMessage => _errorMessage;
   bool get isLoading => _isLoading;
   List<FoodModel> get foodModelList => _foodModelList;
 
@@ -36,10 +45,10 @@ class CalorieTrackerManager extends ChangeNotifier {
     _setLoading(true);
     final eitherFailureOrList = await repository.getFood(query);
     _setFoodModelListToSavedList();
-    eitherFailureOrList.fold(
+    _errorMessage = eitherFailureOrList.fold(
       (failure) =>
           failure is ServerFailure ? noConnectionMessage : foodNotFoundMessage,
-      (list) => _errorMessage = null,
+      (list) => '',
     );
     _setLoading(false);
   }
@@ -74,6 +83,21 @@ class CalorieTrackerManager extends ChangeNotifier {
     notifyListeners();
   }
 
+  NutritionalModel _createNutritionalModel(List<FoodModel> foodModelList) {
+    return NutritionalModel(
+      calories: _nutricionalInformation(NutrientType.calories),
+      sugar: _nutricionalInformation(NutrientType.sugar),
+      fiber: _nutricionalInformation(NutrientType.fiber),
+      totalCarbs: _nutricionalInformation(NutrientType.totalCarbs),
+      saturatedFat: _nutricionalInformation(NutrientType.saturatedFat),
+      totalFat: _nutricionalInformation(NutrientType.totalFat),
+      protein: _nutricionalInformation(NutrientType.protein),
+      sodium: _nutricionalInformation(NutrientType.sodium),
+      potassium: _nutricionalInformation(NutrientType.potassium),
+      cholesterol: _nutricionalInformation(NutrientType.cholesterol),
+    );
+  }
+
   double _nutricionalInformation(NutrientType type) {
     double nutrient = 0;
     if (_foodModelList.isNotEmpty) {
@@ -85,14 +109,14 @@ class CalorieTrackerManager extends ChangeNotifier {
             }
             return nutrient;
           }
-        case NutrientType.carbs:
+        case NutrientType.totalCarbs:
           {
             for (final FoodModel foodModel in _foodModelList) {
               nutrient += foodModel.totalCarbs;
             }
             return nutrient;
           }
-        case NutrientType.fat:
+        case NutrientType.totalFat:
           {
             for (final FoodModel foodModel in _foodModelList) {
               nutrient += foodModel.totalFat;
@@ -106,6 +130,36 @@ class CalorieTrackerManager extends ChangeNotifier {
             }
             return nutrient;
           }
+        case NutrientType.sugar:
+          for (final FoodModel foodModel in _foodModelList) {
+            nutrient += foodModel.sugar;
+          }
+          return nutrient;
+        case NutrientType.fiber:
+          for (final FoodModel foodModel in _foodModelList) {
+            nutrient += foodModel.fiber;
+          }
+          return nutrient;
+        case NutrientType.saturatedFat:
+          for (final FoodModel foodModel in _foodModelList) {
+            nutrient += foodModel.saturatedFat;
+          }
+          return nutrient;
+        case NutrientType.sodium:
+          for (final FoodModel foodModel in _foodModelList) {
+            nutrient += foodModel.sodium;
+          }
+          return nutrient;
+        case NutrientType.potassium:
+          for (final FoodModel foodModel in _foodModelList) {
+            nutrient += foodModel.potassium;
+          }
+          return nutrient;
+        case NutrientType.cholesterol:
+          for (final FoodModel foodModel in _foodModelList) {
+            nutrient += foodModel.cholesterol;
+          }
+          return nutrient;
       }
     }
     return nutrient;

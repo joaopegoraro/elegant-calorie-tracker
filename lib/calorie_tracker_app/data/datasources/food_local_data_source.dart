@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/error/exception.dart';
-import '../food_model.dart';
+import '../models/food_model.dart';
 
 abstract class FoodLocalDataSource {
   /// Gets the saved foods
@@ -17,6 +17,7 @@ abstract class FoodLocalDataSource {
 }
 
 const String cachedFoodList = 'CACHED_FOOD_LIST';
+const String savedDate = 'SAVED_DATE';
 
 class SharedPrefFoodLocalDataSource implements FoodLocalDataSource {
   final SharedPreferences sharedPreferences;
@@ -27,13 +28,13 @@ class SharedPrefFoodLocalDataSource implements FoodLocalDataSource {
   Future<void> saveFoods(List<FoodModel> foodsToCache) {
     final String? initialJsonString =
         sharedPreferences.getString(cachedFoodList);
-
+    sharedPreferences.setInt(savedDate, DateTime.now().day);
     // if the cached food list is null, create a new json string containing the
     // converted food model
     if (initialJsonString == null) {
       final List<Map> listOfJsonMaps = [];
       final String finalJsonString =
-          mergeFoodModelListAndJsonMapIntoString(foodsToCache, listOfJsonMaps);
+          _mergeFoodModelListAndJsonMapIntoString(foodsToCache, listOfJsonMaps);
       return sharedPreferences.setString(
         cachedFoodList,
         finalJsonString,
@@ -45,7 +46,7 @@ class SharedPrefFoodLocalDataSource implements FoodLocalDataSource {
       final listOfJsonMaps =
           convertedJsonStringToJsonMap["items"] as List<dynamic>;
       final String finalJsonString =
-          mergeFoodModelListAndJsonMapIntoString(foodsToCache, listOfJsonMaps);
+          _mergeFoodModelListAndJsonMapIntoString(foodsToCache, listOfJsonMaps);
       return sharedPreferences.setString(
         cachedFoodList,
         finalJsonString,
@@ -55,6 +56,12 @@ class SharedPrefFoodLocalDataSource implements FoodLocalDataSource {
 
   @override
   Future<List<FoodModel>> getSavedFoods() {
+    final int today = DateTime.now().day;
+    final int? savedDay = sharedPreferences.getInt(savedDate);
+    if (today != savedDay) {
+      emptySavedFoodList();
+      throw CacheException();
+    }
     final String? savedFoodList = sharedPreferences.getString(cachedFoodList);
     if (savedFoodList == null) {
       throw CacheException();
@@ -82,6 +89,9 @@ class SharedPrefFoodLocalDataSource implements FoodLocalDataSource {
   Future<void> editSavedFood(int index, double newServingSize) async {
     final List<FoodModel> foodModelList = await getSavedFoods();
     final FoodModel oldFoodModel = foodModelList[index];
+    if (oldFoodModel.servingSize == newServingSize) {
+      return;
+    }
     emptySavedFoodList();
     final double ratio = newServingSize / oldFoodModel.servingSize;
     final FoodModel editedFoodModel = FoodModel(
@@ -103,7 +113,7 @@ class SharedPrefFoodLocalDataSource implements FoodLocalDataSource {
     saveFoods(foodModelList);
   }
 
-  String mergeFoodModelListAndJsonMapIntoString(
+  String _mergeFoodModelListAndJsonMapIntoString(
     List<FoodModel> foodModelList,
     List<dynamic> jsonMapList,
   ) {

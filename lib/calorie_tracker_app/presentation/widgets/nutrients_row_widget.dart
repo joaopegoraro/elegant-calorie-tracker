@@ -13,54 +13,36 @@ class NutrientsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Screen.isLandscape(context)
-        ? Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              NutrientWidget(
-                context,
-                nutrient: 'Carbs',
-                text: '${carbs.toStringAsFixed(1)}g',
-                nutrientWidth: Screen.widthUnit(context) * 17,
-              ),
-              NutrientWidget(
-                context,
-                nutrient: 'Fat',
-                text: '${fat.toStringAsFixed(1)}g',
-                nutrientWidth: Screen.widthUnit(context) * 17,
-              ),
-              NutrientWidget(
-                context,
-                nutrient: 'Protein',
-                text: '${protein.toStringAsFixed(1)}g',
-                nutrientWidth: Screen.widthUnit(context) * 17,
-              ),
-            ],
-          )
-        : Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              NutrientWidget(
-                context,
-                nutrient: 'Carbs',
-                text: '${carbs.toStringAsFixed(1)}g',
-                nutrientWidth: Screen.widthUnit(context) * 27,
-              ),
-              NutrientWidget(
-                context,
-                nutrient: 'Fat',
-                text: '${fat.toStringAsFixed(1)} g',
-                nutrientWidth: Screen.widthUnit(context) * 27,
-              ),
-              NutrientWidget(
-                context,
-                nutrient: 'Protein',
-                text: '${protein.toStringAsFixed(1)}g',
-                nutrientWidth: Screen.widthUnit(context) * 27,
-              ),
-            ],
-          );
+    return GestureDetector(
+      onTap: () {},
+      child: _buildRow(context),
+    );
+  }
+
+  Row _buildRow(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        NutrientWidget(
+          context,
+          nutrient: 'Carbs',
+          text: '${carbs.toStringAsFixed(1)}g',
+          nutrientWidth: Screen.widthUnit(context) * 27,
+        ),
+        NutrientWidget(
+          context,
+          nutrient: 'Fat',
+          text: '${fat.toStringAsFixed(1)} g',
+          nutrientWidth: Screen.widthUnit(context) * 27,
+        ),
+        NutrientWidget(
+          context,
+          nutrient: 'Protein',
+          text: '${protein.toStringAsFixed(1)}g',
+          nutrientWidth: Screen.widthUnit(context) * 27,
+        ),
+      ],
+    );
   }
 }

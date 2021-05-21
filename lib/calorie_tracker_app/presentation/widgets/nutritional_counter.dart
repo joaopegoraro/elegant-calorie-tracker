@@ -1,57 +1,32 @@
+import 'package:elegant_calorie_tracker/calorie_tracker_app/data/models/nutritional_model.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/utils/screen.dart';
 import 'calorie_counter.dart';
 import 'nutrients_row_widget.dart';
 
 class NutritionalCounter extends StatelessWidget {
   const NutritionalCounter(
-      {Key? key,
-      required this.calories,
-      required this.carbs,
-      required this.fat,
-      required this.protein})
+      {Key? key, required this.totalNutrition, required this.onTap})
       : super(key: key);
-  final double calories;
-  final double carbs;
-  final double fat;
-  final double protein;
+  final NutritionalModel totalNutrition;
+  final Function(BuildContext, NutritionalModel) onTap;
 
   @override
   Widget build(BuildContext context) {
-    return OrientationBuilder(builder: (context, Orientation orientation) {
-      switch (orientation) {
-        case Orientation.portrait:
-          return Column(
-            children: [
-              CalorieCounter(
-                calories: calories,
-              ),
-              NutrientsRow(
-                carbs: carbs,
-                fat: fat,
-                protein: protein,
-              ),
-            ],
-          );
-        case Orientation.landscape:
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CalorieCounter(
-                calories: calories,
-              ),
-              SizedBox(
-                width: Screen.widthUnit(context) * 10,
-              ),
-              NutrientsRow(
-                carbs: carbs,
-                fat: fat,
-                protein: protein,
-              ),
-            ],
-          );
-      }
-    });
+    return GestureDetector(
+      onTap: () => onTap(context, totalNutrition),
+      child: Column(
+        children: [
+          CalorieCounter(
+            calories: totalNutrition.calories,
+          ),
+          NutrientsRow(
+            carbs: totalNutrition.totalCarbs,
+            fat: totalNutrition.totalFat,
+            protein: totalNutrition.protein,
+          ),
+        ],
+      ),
+    );
   }
 }

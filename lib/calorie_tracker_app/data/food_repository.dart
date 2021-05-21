@@ -5,7 +5,7 @@ import '../../core/error/failures.dart';
 import '../../core/utils/network_info.dart';
 import 'datasources/food_local_data_source.dart';
 import 'datasources/food_remote_data_source.dart';
-import 'food_model.dart';
+import 'models/food_model.dart';
 
 abstract class FoodRepository {
   Future<Either<Failure, List<FoodModel>>> getFood(String query);

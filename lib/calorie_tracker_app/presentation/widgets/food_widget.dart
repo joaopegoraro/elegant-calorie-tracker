@@ -4,7 +4,7 @@ import '../../../core/utils/screen.dart';
 import '../../../core/utils/themes.dart';
 import '../../../core/widgets/custom_card/custom_card.dart';
 import '../../../core/widgets/custom_text_widget.dart';
-import '../../data/food_model.dart';
+import '../../data/models/food_model.dart';
 
 /// Takes a Food object as a parameter and returns a card with its name and calories
 class FoodWidget extends StatelessWidget {

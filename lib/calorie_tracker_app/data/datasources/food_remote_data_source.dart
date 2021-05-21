@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 import '../../../core/error/exception.dart';
 import '../../../core/utils/api.dart';
-import '../food_model.dart';
+import '../models/food_model.dart';
 
 abstract class FoodRemoteDataSource {
   /// Calls the https://api.calorieninjas.com/v1/nutrition?query={query}

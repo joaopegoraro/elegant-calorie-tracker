@@ -1,9 +1,12 @@
-import 'package:elegant_calorie_tracker/calorie_tracker_app/data/food_model.dart';
+import 'package:elegant_calorie_tracker/calorie_tracker_app/data/models/food_model.dart';
+import 'package:elegant_calorie_tracker/calorie_tracker_app/data/models/nutritional_model.dart';
+import 'package:elegant_calorie_tracker/calorie_tracker_app/presentation/widgets/total_nutritional_information.dart';
+import 'package:elegant_calorie_tracker/core/utils/themes.dart';
+import 'package:elegant_calorie_tracker/core/widgets/custom_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/utils/screen.dart';
-import '../../../injection_container.dart';
 import '../../calorie_tracker_manager.dart';
 import 'food_information.dart';
 import 'food_search.dart';
@@ -15,7 +18,8 @@ class CalorieTracker extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool _isLoading =
         Provider.of<CalorieTrackerManager>(context).isLoading;
-    final manager = Provider.of<CalorieTrackerManager>(context);
+    final NutritionalModel totalNutrients =
+        Provider.of<CalorieTrackerManager>(context).nutritionalModel;
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -24,10 +28,9 @@ class CalorieTracker extends StatelessWidget {
             height: Screen.heightUnit(context) * 3,
           ),
           NutritionalCounter(
-              calories: manager.calories,
-              carbs: manager.carbs,
-              fat: manager.fat,
-              protein: manager.protein),
+            onTap: _openTotalNutritionalInformation,
+            totalNutrition: totalNutrients,
+          ),
           SizedBox(
             height: Screen.isLandscape(context)
                 ? Screen.heightUnit(context) * 2.5
@@ -99,9 +102,34 @@ class CalorieTracker extends StatelessWidget {
         });
   }
 
-  void _searchFood(BuildContext context, String inputString) =>
-      Provider.of<CalorieTrackerManager>(context, listen: false)
-          .getFood(inputString);
+  dynamic _openTotalNutritionalInformation(
+      BuildContext context, NutritionalModel nutritionalModel) {
+    return showDialog(
+        context: context,
+        builder: (_) {
+          return TotalNutritionalInformation(
+            nutritionalModel: nutritionalModel,
+          );
+        });
+  }
+
+  Future<void> _searchFood(BuildContext context, String inputString) async {
+    await Provider.of<CalorieTrackerManager>(context, listen: false)
+        .getFood(inputString);
+    final String _errorMessage =
+        Provider.of<CalorieTrackerManager>(context, listen: false).errorMessage;
+    if (_errorMessage.isNotEmpty) {
+      final snackBar = SnackBar(
+        backgroundColor: Themes.cardHeader(context),
+        content: CustomTextWidget(
+          _errorMessage,
+          color: Themes.cardBackground(context),
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+    return;
+  }
 
   void _clearColumn(BuildContext context) =>
       Provider.of<CalorieTrackerManager>(context, listen: false)
