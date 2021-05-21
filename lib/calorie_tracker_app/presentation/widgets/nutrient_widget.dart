@@ -13,17 +13,19 @@ class NutrientWidget extends CustomCard {
   }) : super(
           child: FittedBox(
             fit: BoxFit.fill,
-            child: Column(
-              children: [
-                CustomTextWidget(
-                  nutrient,
-                  color: Theme.of(context).secondaryHeaderColor,
-                ),
-                CustomTextWidget(
-                  text,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ],
+            child: SizedBox(
+              child: Column(
+                children: [
+                  CustomTextWidget(
+                    nutrient,
+                    color: Theme.of(context).secondaryHeaderColor,
+                  ),
+                  CustomTextWidget(
+                    text,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ],
+              ),
             ),
           ),
         );

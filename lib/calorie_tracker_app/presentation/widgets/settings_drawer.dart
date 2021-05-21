@@ -1,7 +1,9 @@
+import 'package:about/about.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:elegant_calorie_tracker/core/utils/screen.dart';
 import 'package:elegant_calorie_tracker/core/widgets/custom_text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsDrawer extends StatefulWidget {
   @override
@@ -11,7 +13,7 @@ class SettingsDrawer extends StatefulWidget {
 class _SettingsDrawerState extends State<SettingsDrawer> {
   @override
   Widget build(BuildContext context) {
-    bool _isDark = EasyDynamicTheme.of(context).themeMode == ThemeMode.dark;
+    final themeMode = EasyDynamicTheme.of(context).themeMode;
     final theme = Theme.of(context);
     return SafeArea(
       child: SizedBox(
@@ -42,11 +44,10 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                     size: Screen.heightUnit(context) * 3.5,
                   ),
                   trailing: Switch(
-                    value: _isDark,
+                    value: _isDarkMode(themeMode),
                     onChanged: (bool value) {
                       setState(() {
-                        _isDark = value;
-                        EasyDynamicTheme.of(context).changeTheme(dark: _isDark);
+                        EasyDynamicTheme.of(context).changeTheme(dark: value);
                       });
                     },
                   ),
@@ -57,6 +58,10 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                     Icons.bug_report,
                     size: Screen.heightUnit(context) * 3.5,
                   ),
+                  onTap: () {
+                    launch(
+                        'https://github.com/hahmraro/elegant-calorie-tracker/issues');
+                  },
                   title: CustomTextWidget(
                     'Report bugs',
                     color: theme.primaryColor,
@@ -68,6 +73,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                     Icons.format_align_left,
                     size: Screen.heightUnit(context) * 3.5,
                   ),
+                  onTap: () => _buildShowAboutPage(context, theme),
                   title: CustomTextWidget(
                     'About',
                     color: theme.primaryColor,
@@ -78,6 +84,45 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
           ),
         ),
       ),
+    );
+  }
+
+  bool _isDarkMode(ThemeMode? themeMode) => themeMode == ThemeMode.dark;
+
+  Future<void> _buildShowAboutPage(BuildContext context, ThemeData theme) {
+    return showAboutPage(
+      context: context,
+      values: {
+        'version': '1.0.0',
+      },
+      title: CustomTextWidget(
+        'About',
+        color: theme.primaryColorLight,
+      ),
+      applicationDescription: CustomTextWidget(
+        'Minimalist calorie tracker with a fun and different design',
+        color: theme.primaryColor,
+      ),
+      applicationIcon: CustomTextWidget(
+        'G',
+        color: theme.primaryColor,
+        fontWeight: FontWeight.normal,
+        fontSize: Screen.heightUnit(context) * 13.5,
+        fontFamily: 'Doodle',
+      ),
+      children: <Widget>[
+        LicensesPageListTile(
+          title: Text(
+            "Licenses",
+            style: TextStyle(
+              color: theme.primaryColor,
+              fontWeight: FontWeight.bold,
+              fontSize: Screen.heightUnit(context) * 3,
+            ),
+          ),
+          icon: const Icon(Icons.favorite),
+        ),
+      ],
     );
   }
 }

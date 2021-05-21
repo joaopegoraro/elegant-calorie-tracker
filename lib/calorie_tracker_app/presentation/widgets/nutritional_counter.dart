@@ -13,20 +13,20 @@ class NutritionalCounter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => onTap(context, totalNutrition),
-      child: Column(
-        children: [
-          CalorieCounter(
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () => onTap(context, totalNutrition),
+          child: CalorieCounter(
             calories: totalNutrition.calories,
           ),
-          NutrientsRow(
-            carbs: totalNutrition.totalCarbs,
-            fat: totalNutrition.totalFat,
-            protein: totalNutrition.protein,
-          ),
-        ],
-      ),
+        ),
+        NutrientsRow(
+          carbs: totalNutrition.totalCarbs,
+          fat: totalNutrition.totalFat,
+          protein: totalNutrition.protein,
+        ),
+      ],
     );
   }
 }

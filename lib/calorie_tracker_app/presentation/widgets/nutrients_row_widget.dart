@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/utils/screen.dart';
 import 'nutrient_widget.dart';
 
 class NutrientsRow extends StatelessWidget {
@@ -13,10 +12,7 @@ class NutrientsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: _buildRow(context),
-    );
+    return _buildRow(context);
   }
 
   Row _buildRow(BuildContext context) {
@@ -28,19 +24,16 @@ class NutrientsRow extends StatelessWidget {
           context,
           nutrient: 'Carbs',
           text: '${carbs.toStringAsFixed(1)}g',
-          nutrientWidth: Screen.widthUnit(context) * 27,
         ),
         NutrientWidget(
           context,
           nutrient: 'Fat',
           text: '${fat.toStringAsFixed(1)} g',
-          nutrientWidth: Screen.widthUnit(context) * 27,
         ),
         NutrientWidget(
           context,
           nutrient: 'Protein',
           text: '${protein.toStringAsFixed(1)}g',
-          nutrientWidth: Screen.widthUnit(context) * 27,
         ),
       ],
     );

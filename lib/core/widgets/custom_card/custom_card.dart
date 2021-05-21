@@ -25,15 +25,9 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final double defaultSidePadding = Screen.isLandscape(context)
-        ? Screen.widthUnit(context) * 2
-        : Screen.widthUnit(context) * 4;
-    final double defaultTopBottomPadding = Screen.isLandscape(context)
-        ? Screen.heightUnit(context) * .5
-        : Screen.heightUnit(context) * 1;
-    final double defaultHeight = Screen.isLandscape(context)
-        ? Screen.heightUnit(context) * 8.5
-        : Screen.heightUnit(context) * 11;
+    final double defaultSidePadding = Screen.widthUnit(context) * 4;
+    final double defaultTopBottomPadding = Screen.heightUnit(context) * 1;
+    final double defaultHeight = Screen.heightUnit(context) * 11;
     return Card(
       shadowColor: theme.primaryColorDark,
       color: theme.cardColor,
@@ -44,7 +38,7 @@ class CustomCard extends StatelessWidget {
       elevation: elevation,
       child: Container(
         height: height ?? defaultHeight,
-        width: width ?? Screen.widthUnit(context) * 20.5,
+        width: width ?? Screen.widthUnit(context) * 27,
         alignment: alignment,
         // Padding needs to be separated between sides and top/bottom so it stays proportional to screen size
         padding: EdgeInsets.only(
