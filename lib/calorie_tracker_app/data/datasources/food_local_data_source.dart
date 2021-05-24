@@ -22,7 +22,7 @@ const String savedDate = 'SAVED_DATE';
 class SharedPrefFoodLocalDataSource implements FoodLocalDataSource {
   final SharedPreferences sharedPreferences;
 
-  SharedPrefFoodLocalDataSource({required this.sharedPreferences});
+  const SharedPrefFoodLocalDataSource({required this.sharedPreferences});
 
   @override
   Future<void> saveFoods(List<FoodModel> foodsToCache) {

@@ -17,40 +17,42 @@ class FoodInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return FittedBox(
-      child: AlertDialog(
-        backgroundColor: theme.dialogBackgroundColor,
-        title: CustomTextWidget(
-          '${foodModel.name} ',
-          color: theme.secondaryHeaderColor,
+    return SingleChildScrollView(
+      child: FittedBox(
+        child: AlertDialog(
+          backgroundColor: theme.dialogBackgroundColor,
+          title: CustomTextWidget(
+            '${foodModel.name} ',
+            color: theme.focusColor,
+          ),
+          content: SingleChildScrollView(
+            child: FittedBox(
+              child: FoodNutrients(
+                model: Left(foodModel),
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Provider.of<CalorieTrackerManager>(context, listen: false)
+                    .removeFood(foodModel.index);
+                Navigator.pop(context, 'Remove');
+              },
+              child: CustomTextWidget(
+                'Remove',
+                color: theme.focusColor,
+              ),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'Close'),
+              child: CustomTextWidget(
+                'Close',
+                color: theme.focusColor,
+              ),
+            ),
+          ],
         ),
-        content: SingleChildScrollView(
-          child: FittedBox(
-            child: FoodNutrients(
-              model: Left(foodModel),
-            ),
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Provider.of<CalorieTrackerManager>(context, listen: false)
-                  .removeFood(foodModel.index);
-              Navigator.pop(context, 'Remove');
-            },
-            child: CustomTextWidget(
-              'Remove',
-              color: theme.secondaryHeaderColor,
-            ),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, 'Close'),
-            child: CustomTextWidget(
-              'Close',
-              color: theme.secondaryHeaderColor,
-            ),
-          ),
-        ],
       ),
     );
   }

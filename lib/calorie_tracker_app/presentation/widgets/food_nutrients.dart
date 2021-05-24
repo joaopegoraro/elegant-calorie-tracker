@@ -35,7 +35,7 @@ class FoodNutrients extends StatelessWidget {
     final theme = Theme.of(context);
     return CustomTextWidget(
       "$name: ",
-      color: theme.secondaryHeaderColor,
+      color: theme.focusColor,
     );
   }
 
@@ -50,7 +50,7 @@ class FoodNutrients extends StatelessWidget {
         ),
         CustomTextWidget(
           unit,
-          color: theme.secondaryHeaderColor,
+          color: theme.focusColor,
         ),
       ],
     );
@@ -125,6 +125,7 @@ class FoodNutrients extends StatelessWidget {
     return Row(
       children: [
         CustomCard(
+          paddingTopBottom: 0,
           paddingSides: Screen.widthUnit(context) * 0.5,
           width: Screen.widthUnit(context) * 15,
           height: Screen.heightUnit(context) * 3.5,
@@ -147,7 +148,7 @@ class FoodNutrients extends StatelessWidget {
               isCollapsed: true,
             ),
             style: TextStyle(
-              color: theme.primaryColor,
+              color: theme.hintColor,
               decoration: TextDecoration.none,
               fontWeight: FontWeight.bold,
               fontSize: Screen.heightUnit(context) * 2.5,
@@ -156,7 +157,7 @@ class FoodNutrients extends StatelessWidget {
         ),
         CustomTextWidget(
           'g ',
-          color: theme.secondaryHeaderColor,
+          color: theme.focusColor,
         ),
       ],
     );

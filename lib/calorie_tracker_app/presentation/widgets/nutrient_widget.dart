@@ -22,7 +22,7 @@ class NutrientWidget extends CustomCard {
                   ),
                   CustomTextWidget(
                     text,
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).hintColor,
                   ),
                 ],
               ),

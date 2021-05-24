@@ -43,13 +43,16 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                     Icons.brightness_3_rounded,
                     size: Screen.heightUnit(context) * 3.5,
                   ),
-                  trailing: Switch(
-                    value: _isDarkMode(themeMode),
-                    onChanged: (bool value) {
-                      setState(() {
-                        EasyDynamicTheme.of(context).changeTheme(dark: value);
-                      });
-                    },
+                  trailing: Transform.scale(
+                    scale: Screen.height(context) >= 900 ? 1.5 : 1,
+                    child: Switch(
+                      value: _isDarkMode(themeMode),
+                      onChanged: (bool value) {
+                        setState(() {
+                          EasyDynamicTheme.of(context).changeTheme(dark: value);
+                        });
+                      },
+                    ),
                   ),
                 ),
                 const Divider(),
@@ -97,7 +100,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
       },
       title: CustomTextWidget(
         'About',
-        color: theme.primaryColorLight,
+        color: theme.hoverColor,
       ),
       applicationDescription: CustomTextWidget(
         'Minimalist calorie tracker with a fun and different design',

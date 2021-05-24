@@ -20,7 +20,7 @@ class TotalNutritionalInformation extends StatelessWidget {
         backgroundColor: theme.dialogBackgroundColor,
         title: CustomTextWidget(
           '${nutritionalModel.name} ',
-          color: theme.secondaryHeaderColor,
+          color: theme.focusColor,
         ),
         content: SingleChildScrollView(
           child: FittedBox(
@@ -34,7 +34,7 @@ class TotalNutritionalInformation extends StatelessWidget {
             onPressed: () => Navigator.pop(context, 'Close'),
             child: CustomTextWidget(
               'Close',
-              color: theme.secondaryHeaderColor,
+              color: theme.focusColor,
             ),
           ),
         ],

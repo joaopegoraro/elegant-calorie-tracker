@@ -42,7 +42,7 @@ class FoodWidget extends StatelessWidget {
             children: [
               CustomTextWidget(
                 foodModel.calories.toStringAsFixed(1),
-                color: theme.primaryColor,
+                color: theme.hintColor,
               ),
               CustomTextWidget(
                 ' kcal',

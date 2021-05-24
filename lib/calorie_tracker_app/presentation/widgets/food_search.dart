@@ -61,7 +61,7 @@ class _FoodSearchState extends State<FoodSearch> {
           border: InputBorder.none,
           isCollapsed: true,
           hintStyle: TextStyle(
-            color: theme.primaryColor,
+            color: theme.buttonColor,
           ),
         ),
         style: TextStyle(

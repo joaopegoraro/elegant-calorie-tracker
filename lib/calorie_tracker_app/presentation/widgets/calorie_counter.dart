@@ -18,7 +18,7 @@ class CalorieCounter extends StatelessWidget {
           'Calories',
           color: theme.primaryColor,
           fontSize: Screen.heightUnit(context) * 7,
-          shadowColor: Colors.black,
+          shadowColor: theme.primaryColorDark,
         ),
         SizedBox(
           height: Screen.heightUnit(context) * .65,
@@ -30,7 +30,7 @@ class CalorieCounter extends StatelessWidget {
         ),
         CustomTextWidget(
           'kcal',
-          color: theme.secondaryHeaderColor,
+          color: theme.focusColor,
           fontSize: Screen.heightUnit(context) * 3.5,
         ),
         SizedBox(

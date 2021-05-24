@@ -120,7 +120,7 @@ class CalorieTracker extends StatelessWidget {
         Provider.of<CalorieTrackerManager>(context, listen: false).errorMessage;
     if (_errorMessage.isNotEmpty) {
       final snackBar = SnackBar(
-        backgroundColor: theme.secondaryHeaderColor,
+        backgroundColor: theme.buttonColor,
         content: CustomTextWidget(
           _errorMessage,
           color: theme.cardColor,
