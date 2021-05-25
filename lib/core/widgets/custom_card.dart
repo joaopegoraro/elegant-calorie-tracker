@@ -27,7 +27,6 @@ class CustomCard extends StatelessWidget {
     final theme = Theme.of(context);
     final double defaultSidePadding = Screen.widthUnit(context) * 4;
     final double defaultTopBottomPadding = Screen.heightUnit(context) * 1;
-    final double defaultHeight = Screen.heightUnit(context) * 11;
     return Card(
       shadowColor: theme.primaryColorDark,
       color: theme.cardColor,
@@ -37,10 +36,9 @@ class CustomCard extends StatelessWidget {
               : BorderRadius.circular(Screen.heightUnit(context) * 1.5)),
       elevation: elevation,
       child: Container(
-        height: height ?? defaultHeight,
+        height: height ?? Screen.heightUnit(context) * 11,
         width: width ?? Screen.widthUnit(context) * 27,
         alignment: alignment,
-        // Padding needs to be separated between sides and top/bottom so it stays proportional to screen size
         padding: EdgeInsets.only(
           left: paddingSides ?? defaultSidePadding,
           right: paddingSides ?? defaultSidePadding,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/utils/screen.dart';
-import '../../../core/widgets/custom_card/custom_card.dart';
+import '../../../core/widgets/custom_card.dart';
 import '../../../core/widgets/custom_text_widget.dart';
 import '../../data/models/food_model.dart';
 

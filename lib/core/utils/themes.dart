@@ -58,7 +58,6 @@ class DarkTheme {
   static const Color constantUnit = Color(0xFFF5F5F5);
 }
 
-/// Static class that contains the theme colors
 final ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   indicatorColor: LightTheme.cardConstantUnit,

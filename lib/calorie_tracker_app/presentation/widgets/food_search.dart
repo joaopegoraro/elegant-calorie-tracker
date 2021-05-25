@@ -1,5 +1,5 @@
 import 'package:elegant_calorie_tracker/core/widgets/custom_button.dart';
-import 'package:elegant_calorie_tracker/core/widgets/custom_card/custom_card.dart';
+import 'package:elegant_calorie_tracker/core/widgets/custom_card.dart';
 import 'package:elegant_calorie_tracker/core/widgets/custom_text_widget.dart';
 import 'package:flutter/material.dart';
 

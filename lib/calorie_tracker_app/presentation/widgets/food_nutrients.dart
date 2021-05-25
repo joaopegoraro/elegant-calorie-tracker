@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:elegant_calorie_tracker/calorie_tracker_app/data/models/nutritional_model.dart';
 import 'package:elegant_calorie_tracker/core/utils/screen.dart';
-import 'package:elegant_calorie_tracker/core/widgets/custom_card/custom_card.dart';
+import 'package:elegant_calorie_tracker/core/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,11 +22,15 @@ class FoodNutrients extends StatelessWidget {
       children: [
         _nutrientNameColumn(context),
         model.fold(
-          (foodModel) =>
-              _nutrientValueColumn(context, eitherModel: Left(foodModel)),
-          (nutritionalModel) => _nutrientValueColumn(context,
-              eitherModel: Right(nutritionalModel)),
-        )
+          (foodModel) => _nutrientValueColumn(
+            context,
+            eitherModel: Left(foodModel),
+          ),
+          (nutritionalModel) => _nutrientValueColumn(
+            context,
+            eitherModel: Right(nutritionalModel),
+          ),
+        ),
       ],
     );
   }
@@ -82,39 +86,43 @@ class FoodNutrients extends StatelessWidget {
       {required Either<FoodModel, NutritionalModel> eitherModel}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
-      children: eitherModel.fold((foodModel) {
-        return [
-          _buildServingSize(context, foodModel),
-          _nutrientValue(context, value: foodModel.calories, unit: 'kcal'),
-          _nutrientValue(context, value: foodModel.sugar, unit: 'g'),
-          _nutrientValue(context, value: foodModel.fiber, unit: 'g'),
-          _nutrientValue(context, value: foodModel.totalCarbs, unit: 'g'),
-          _nutrientValue(context, value: foodModel.saturatedFat, unit: 'g'),
-          _nutrientValue(context, value: foodModel.totalFat, unit: 'g'),
-          _nutrientValue(context, value: foodModel.protein, unit: 'g'),
-          _nutrientValue(context, value: foodModel.sodium, unit: 'mg'),
-          _nutrientValue(context, value: foodModel.potassium, unit: 'mg'),
-          _nutrientValue(context, value: foodModel.cholesterol, unit: 'mg'),
-        ];
-      }, (nutritionalModel) {
-        return [
-          _nutrientValue(context,
-              value: nutritionalModel.calories, unit: 'kcal'),
-          _nutrientValue(context, value: nutritionalModel.sugar, unit: 'g'),
-          _nutrientValue(context, value: nutritionalModel.fiber, unit: 'g'),
-          _nutrientValue(context,
-              value: nutritionalModel.totalCarbs, unit: 'g'),
-          _nutrientValue(context,
-              value: nutritionalModel.saturatedFat, unit: 'g'),
-          _nutrientValue(context, value: nutritionalModel.totalFat, unit: 'g'),
-          _nutrientValue(context, value: nutritionalModel.protein, unit: 'g'),
-          _nutrientValue(context, value: nutritionalModel.sodium, unit: 'mg'),
-          _nutrientValue(context,
-              value: nutritionalModel.potassium, unit: 'mg'),
-          _nutrientValue(context,
-              value: nutritionalModel.cholesterol, unit: 'mg'),
-        ];
-      }),
+      children: eitherModel.fold(
+        (foodModel) {
+          return [
+            _buildServingSize(context, foodModel),
+            _nutrientValue(context, value: foodModel.calories, unit: 'kcal'),
+            _nutrientValue(context, value: foodModel.sugar, unit: 'g'),
+            _nutrientValue(context, value: foodModel.fiber, unit: 'g'),
+            _nutrientValue(context, value: foodModel.totalCarbs, unit: 'g'),
+            _nutrientValue(context, value: foodModel.saturatedFat, unit: 'g'),
+            _nutrientValue(context, value: foodModel.totalFat, unit: 'g'),
+            _nutrientValue(context, value: foodModel.protein, unit: 'g'),
+            _nutrientValue(context, value: foodModel.sodium, unit: 'mg'),
+            _nutrientValue(context, value: foodModel.potassium, unit: 'mg'),
+            _nutrientValue(context, value: foodModel.cholesterol, unit: 'mg'),
+          ];
+        },
+        (nutritionalModel) {
+          return [
+            _nutrientValue(context,
+                value: nutritionalModel.calories, unit: 'kcal'),
+            _nutrientValue(context, value: nutritionalModel.sugar, unit: 'g'),
+            _nutrientValue(context, value: nutritionalModel.fiber, unit: 'g'),
+            _nutrientValue(context,
+                value: nutritionalModel.totalCarbs, unit: 'g'),
+            _nutrientValue(context,
+                value: nutritionalModel.saturatedFat, unit: 'g'),
+            _nutrientValue(context,
+                value: nutritionalModel.totalFat, unit: 'g'),
+            _nutrientValue(context, value: nutritionalModel.protein, unit: 'g'),
+            _nutrientValue(context, value: nutritionalModel.sodium, unit: 'mg'),
+            _nutrientValue(context,
+                value: nutritionalModel.potassium, unit: 'mg'),
+            _nutrientValue(context,
+                value: nutritionalModel.cholesterol, unit: 'mg'),
+          ];
+        },
+      ),
     );
   }
 

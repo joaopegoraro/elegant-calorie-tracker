@@ -31,21 +31,15 @@ class CalorieTracker extends StatelessWidget {
             totalNutrition: totalNutrients,
           ),
           SizedBox(
-            height: Screen.isLandscape(context)
-                ? Screen.heightUnit(context) * 2.5
-                : Screen.heightUnit(context) * 1,
+            height: Screen.heightUnit(context) * 1,
           ),
           Divider(
-            thickness: Screen.isLandscape(context)
-                ? Screen.heightUnit(context) * 1
-                : Screen.heightUnit(context) * .5,
+            thickness: Screen.heightUnit(context) * .5,
             indent: Screen.widthUnit(context) * 7.5,
             endIndent: Screen.widthUnit(context) * 7.5,
           ),
           SizedBox(
-            height: Screen.isLandscape(context)
-                ? Screen.heightUnit(context) * 2.5
-                : Screen.heightUnit(context) * 1,
+            height: Screen.heightUnit(context) * 1,
           ),
           FoodSearch(
             onPressed: _clearColumn,

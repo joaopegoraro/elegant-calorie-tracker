@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/widgets/custom_card/custom_card.dart';
+import '../../../core/widgets/custom_card.dart';
 import '../../../core/widgets/custom_text_widget.dart';
 
 /// Card wrapped in a FittedBox that returns the sum of the nutrients of the FoodColumn foods
