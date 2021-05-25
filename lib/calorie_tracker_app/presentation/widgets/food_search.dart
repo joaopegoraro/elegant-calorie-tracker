@@ -54,31 +54,34 @@ class _FoodSearchState extends State<FoodSearch> {
 
   Widget _buildTextField(BuildContext context) {
     final theme = Theme.of(context);
-    return TextField(
-        textAlign: TextAlign.center,
-        decoration: InputDecoration(
-          hintText: 'Add Food',
-          border: InputBorder.none,
-          isCollapsed: true,
-          hintStyle: TextStyle(
-            color: theme.buttonColor,
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+      child: TextField(
+          textAlign: TextAlign.center,
+          decoration: InputDecoration(
+            hintText: 'Add Food',
+            border: InputBorder.none,
+            isCollapsed: true,
+            hintStyle: TextStyle(
+              color: theme.buttonColor,
+            ),
           ),
-        ),
-        style: TextStyle(
-          color: theme.secondaryHeaderColor,
-          decoration: TextDecoration.none,
-          fontWeight: FontWeight.bold,
-          fontSize: Screen.heightUnit(context) * 3.5,
-        ),
-        keyboardType: TextInputType.visiblePassword,
-        controller: _controller,
-        onChanged: (value) {
-          inputString = value;
-        },
-        onSubmitted: (_) {
-          _dispatchQuery(inputString, context);
-          _controller.clear();
-        });
+          style: TextStyle(
+            color: theme.secondaryHeaderColor,
+            decoration: TextDecoration.none,
+            fontWeight: FontWeight.bold,
+            fontSize: Screen.heightUnit(context) * 3.5,
+          ),
+          keyboardType: TextInputType.visiblePassword,
+          controller: _controller,
+          onChanged: (value) {
+            inputString = value;
+          },
+          onSubmitted: (_) {
+            _dispatchQuery(inputString, context);
+            _controller.clear();
+          }),
+    );
   }
 
   void _dispatchQuery(String inputString, BuildContext context) {

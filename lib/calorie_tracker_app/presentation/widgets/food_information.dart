@@ -21,9 +21,11 @@ class FoodInformation extends StatelessWidget {
       child: FittedBox(
         child: AlertDialog(
           backgroundColor: theme.dialogBackgroundColor,
-          title: CustomTextWidget(
-            '${foodModel.name} ',
-            color: theme.focusColor,
+          title: Center(
+            child: CustomTextWidget(
+              '${foodModel.name} ',
+              color: theme.focusColor,
+            ),
           ),
           content: SingleChildScrollView(
             child: FittedBox(

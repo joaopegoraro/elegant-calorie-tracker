@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 class CustomTextWidget extends StatelessWidget {
   const CustomTextWidget(
     this.text, {
+    this.overflow,
+    this.align,
     this.color,
     this.fontWeight = FontWeight.bold,
     this.fontSize,
@@ -14,6 +16,8 @@ class CustomTextWidget extends StatelessWidget {
     this.blurRadius = 0.5,
   });
   final String text;
+  final TextOverflow? overflow;
+  final TextAlign? align;
   final Color? color;
   final FontWeight fontWeight;
   final double? fontSize;
@@ -25,23 +29,23 @@ class CustomTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return FittedBox(
-      fit: BoxFit.scaleDown,
-      child: Text(
-        text,
-        style: TextStyle(
-          color: color ?? theme.primaryColorLight,
-          fontWeight: fontWeight,
-          fontSize: fontSize ?? Screen.heightUnit(context) * 3.5,
-          fontFamily: fontFamily,
-          shadows: [
-            Shadow(
-              color: (shadowColor ?? theme.primaryColorDark)
-                  .withOpacity(shadow ? 1.0 : 0.0),
-              blurRadius: blurRadius,
-            ),
-          ],
-        ),
+    return Text(
+      text,
+      textScaleFactor: 1.0,
+      overflow: overflow,
+      textAlign: align,
+      style: TextStyle(
+        color: color ?? theme.primaryColorLight,
+        fontWeight: fontWeight,
+        fontSize: fontSize ?? Screen.heightUnit(context) * 3.5,
+        fontFamily: fontFamily,
+        shadows: [
+          Shadow(
+            color: (shadowColor ?? theme.primaryColorDark)
+                .withOpacity(shadow ? 1.0 : 0.0),
+            blurRadius: blurRadius,
+          ),
+        ],
       ),
     );
   }

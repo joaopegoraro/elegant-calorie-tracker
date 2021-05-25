@@ -129,29 +129,32 @@ class FoodNutrients extends StatelessWidget {
           paddingSides: Screen.widthUnit(context) * 0.5,
           width: Screen.widthUnit(context) * 15,
           height: Screen.heightUnit(context) * 3.5,
-          child: TextFormField(
-            controller: _controller,
-            onEditingComplete: () {
-              Provider.of<CalorieTrackerManager>(context, listen: false)
-                  .editFood(
-                foodModel.index,
-                double.parse(_controller.text),
-              );
-              Navigator.pop(context, 'Remove');
-            },
-            maxLength: 4,
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              counterText: '',
-              border: InputBorder.none,
-              isCollapsed: true,
-            ),
-            style: TextStyle(
-              color: theme.hintColor,
-              decoration: TextDecoration.none,
-              fontWeight: FontWeight.bold,
-              fontSize: Screen.heightUnit(context) * 2.5,
+          child: MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+            child: TextFormField(
+              controller: _controller,
+              onEditingComplete: () {
+                Provider.of<CalorieTrackerManager>(context, listen: false)
+                    .editFood(
+                  foodModel.index,
+                  double.parse(_controller.text),
+                );
+                Navigator.pop(context, 'Remove');
+              },
+              maxLength: 4,
+              textAlign: TextAlign.center,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                counterText: '',
+                border: InputBorder.none,
+                isCollapsed: true,
+              ),
+              style: TextStyle(
+                color: theme.hintColor,
+                decoration: TextDecoration.none,
+                fontWeight: FontWeight.bold,
+                fontSize: Screen.heightUnit(context) * 2.5,
+              ),
             ),
           ),
         ),

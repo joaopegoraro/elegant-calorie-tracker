@@ -13,7 +13,6 @@ class SettingsDrawer extends StatefulWidget {
 class _SettingsDrawerState extends State<SettingsDrawer> {
   @override
   Widget build(BuildContext context) {
-    final themeMode = EasyDynamicTheme.of(context).themeMode;
     final theme = Theme.of(context);
     return SafeArea(
       child: SizedBox(
@@ -29,6 +28,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                     margin: EdgeInsets.zero,
                     child: Text(
                       'Settings',
+                      textScaleFactor: 1,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: theme.primaryColor,
@@ -46,7 +46,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                   trailing: Transform.scale(
                     scale: Screen.height(context) >= 900 ? 1.5 : 1,
                     child: Switch(
-                      value: _isDarkMode(themeMode),
+                      value: _isDarkMode(theme),
                       onChanged: (bool value) {
                         setState(() {
                           EasyDynamicTheme.of(context).changeTheme(dark: value);
@@ -90,7 +90,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
     );
   }
 
-  bool _isDarkMode(ThemeMode? themeMode) => themeMode == ThemeMode.dark;
+  bool _isDarkMode(ThemeData theme) => theme.brightness == Brightness.dark;
 
   Future<void> _buildShowAboutPage(BuildContext context, ThemeData theme) {
     return showAboutPage(
@@ -108,6 +108,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
       ),
       applicationIcon: CustomTextWidget(
         'G',
+        align: TextAlign.center,
         color: theme.primaryColor,
         fontWeight: FontWeight.normal,
         fontSize: Screen.heightUnit(context) * 13.5,

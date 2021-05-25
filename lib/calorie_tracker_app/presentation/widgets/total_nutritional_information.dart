@@ -20,6 +20,7 @@ class TotalNutritionalInformation extends StatelessWidget {
         backgroundColor: theme.dialogBackgroundColor,
         title: CustomTextWidget(
           '${nutritionalModel.name} ',
+          align: TextAlign.center,
           color: theme.focusColor,
         ),
         content: SingleChildScrollView(

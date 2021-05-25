@@ -5,7 +5,8 @@ import '../../../core/widgets/custom_card/custom_card.dart';
 import '../../../core/widgets/custom_text_widget.dart';
 import '../../data/models/food_model.dart';
 
-/// Takes a Food object as a parameter and returns a card with its name and calories
+/// Takes a Food object as a parameter and returns a clickable card with its
+/// serving size, name and calories
 class FoodWidget extends StatelessWidget {
   final double? foodWidth;
   final FoodModel foodModel;
@@ -34,9 +35,34 @@ class FoodWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          CustomTextWidget(
-            foodModel.name,
-            color: theme.secondaryHeaderColor,
+          Flexible(
+            child: Row(
+              children: [
+                Row(
+                  children: [
+                    CustomTextWidget(
+                      foodModel.servingSize.toStringAsFixed(0),
+                      color: theme.hintColor,
+                    ),
+                    CustomTextWidget(
+                      'g',
+                      color: theme.secondaryHeaderColor,
+                    ),
+                    CustomTextWidget(
+                      ' of ',
+                      color: theme.hintColor,
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: CustomTextWidget(
+                    foodModel.name,
+                    overflow: TextOverflow.ellipsis,
+                    color: theme.secondaryHeaderColor,
+                  ),
+                ),
+              ],
+            ),
           ),
           Row(
             children: [

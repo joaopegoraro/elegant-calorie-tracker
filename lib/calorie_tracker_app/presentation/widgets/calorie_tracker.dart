@@ -123,6 +123,7 @@ class CalorieTracker extends StatelessWidget {
         backgroundColor: theme.buttonColor,
         content: CustomTextWidget(
           _errorMessage,
+          align: TextAlign.center,
           color: theme.cardColor,
         ),
       );
